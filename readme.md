@@ -14,15 +14,11 @@
 5. Enjoy!
 
 
-##TODO:
+## TODO:
 
--Make user login and signup
-
--Allow users to comment on cards
-
--Make a collection for users
-
--Make a deck builder
-
--Create a forum
+- Make user login and signup
+- Allow users to comment on cards
+- Make a collection for users
+- Make a deck builder
+- Create a forum
 
