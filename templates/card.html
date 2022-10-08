@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/new_styles.css">
+    <title>{{ card.name }} |  YGO Search</title>
+</head>
+<body>
+
+    {% include "/navbar.html" %}
+
+    <div class="card">
+
+        <div class="card-info">
+            <div class="card-img">
+                <img src={{card.img_url}} alt={{card.name}}>
+            </div>
+    
+            <div class="card-data">
+                <h2>{{card.name}}</h2>
+    
+                {% if "Monster" not in card.type %}
+                    {% if card.race != NULL %}
+                        <p class="card-type">{{card.race}} ● {{card.type}}</p>
+                    {% endif %}
+                {% endif %}
+    
+    
+                {% if "Monster" in card.type %}
+                    <p class="card-type">{{card.race}} ● {{card.type}}</p>
+    
+                    {% if "Link" not in card.type %}
+                        {% if "XYZ" not in card.type %}
+                            <p>Level: {{card.level}}</p>
+                        {% endif %}
+                    {% endif %}
+    
+                    {% if "Link" in card.type %}
+                        <p>Link Rating: {{card.link_rating}}</p>
+                    {% endif %}
+    
+                    {% if "XYZ" in card.type %}
+                        <p>Rank: {{card.rank}}</p>
+                    {% endif %}
+    
+                    <p>Attribute: {{card.attribute}}</p>
+                    <p>Attack: {{card.attack}} Defense: {{card.defense}}</p>
+                {% endif %}
+                
+                <p>Card ID: {{card.card_id}}</p>
+                <h3>Description:</h3>
+                <p>{{card.description}}</p>
+    
+            </div>
+    
+            <div class="card-sets">
+                <h2>Sets</h2>
+                <div class="card-set-names">
+                    {% for set in sets %}
+                        <p>{{set.code}} - {{set.name}} - {{set.rarity}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="comments-container">
+            <div class="single-comment">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nam distinctio repudiandae ut sapiente vel eius quos quaerat quis odio inventore, sit dolor officia doloribus maxime necessitatibus at accusantium atque?
+                </p>
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: rgb(228, 228, 228);
+    font-family: Arial, Helvetica, sans-serif;
+    /* overflow: auto; */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+}
+
+/*
+************************************************************************************** 
+**********************************NAVBAR STYLING************************************** 
+************************************************************************************** 
+*/
+
+nav {
+    background-color: #ab5b5b;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    align-items: center;
+    display: flex;
+    gap: 50px;
+    margin-right: 20px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    padding: 12px;
+    width: 40%;
+    border: none;
+    border-radius: 5px;
+}
+
+/*
+************************************************************************************** 
+**********************************SEARCH RESULTS************************************** 
+************************************************************************************** 
+*/
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.content h1 {
+    color: #515151;
+}
+
+.search-query {
+    color: #ab5b5b;
+}
+
+.search-results {
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
+    width: 70%;
+    
+    margin: 20px;
+    padding: 20px;
+}
+
+.search-results h1 {
+    text-align: center;
+}
+
+.cards-list-container {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+}
+
+.single-card {
+    margin: 30px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #7d7d7d;
+    justify-content: center;
+    /* font-weight: 700; */
+    align-items: center;
+}
+
+.single-card-img {
+    object-fit: cover;
+    height: 450px;
+    width: auto;
+    overflow: hidden;
+}
+
+.single-card-img img {
+    height: 100%;
+    width: auto;
+    border-radius: 5px;
+}
+
+.page-numbers {
+    margin: 20px 0 0 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.page-numbers button {
+    border: none;
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: rgba(248, 248, 248, 1);
+    border-radius: 5px;
+    
+    padding: 15px;
+    cursor: pointer;
+}
+
+.page-numbers button:hover {
+    background-color: rgb(237, 237, 237);
+}
+
+.page-numbers button:disabled{
+    background-color: rgb(237, 237, 237);
+}
+
+.page-numbers button:disabled:hover {
+    background-color: rgb(237, 237, 237);
+}
+
+
+/*
+************************************************************************************** 
+****************************************SIDEBAR*************************************** 
+************************************************************************************** 
+*/
+
+.side-bar {
+    width: 25%;
+    padding: 20px;
+    margin: 20px;
+    height: max-content;
+
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/*
+************************************************************************************** 
+**********************************SINGLE CARD PAGE************************************ 
+************************************************************************************** 
+*/
+
+.card-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    color: #515151;
+    height: 100%;
+}
+
+.card {
+    padding: 20px;
+    margin: 20px;
+    height: 90%;
+}
+
+.card-type {
+    font-weight: 700;
+}
+
+.card-data, .card-sets {
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+}
+.card-data h3, .card-sets h3{
+    padding: 20px 0 0 20px;
+}
+
+.card-data p:last-child {
+    margin-bottom: 10px;
+}
+
+.card-data p, .card-sets p {
+    padding: 10px 20px;
+    /* color: black; */
+}
+
+.card-data, .card-sets {
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
+    min-width: 30%;
+    max-width: 30%;
+    min-height: 55%;
+    max-height: 55%;
+    
+    overflow: auto;
+}
+
+.card-data h2, .card-sets h2 {
+    padding: 10px;
+    margin: 10px;
+    border-bottom: 1px solid #7d7d7d;
+}

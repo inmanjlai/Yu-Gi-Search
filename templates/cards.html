@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/new_styles.css">
+    <title>{{card_name}} | YGO Search</title>
+</head>
+<body>
+
+    {% include "/navbar.html" %}
+
+    <div class="content">
+        <div class="search-results">
+            <div class="page-numbers">
+                <form action="/cards/search/page/{{page_number - 1}}" method="POST">
+                    <input type="hidden" name="card-name" value={{card_name}}>
+                        {% if prev %}
+                            <button>Previous Page</button>
+                        {% else %}
+                            <button disabled>Previous Page</button>
+                        {% endif %}
+                    </form>
+                <h1>Search Results For <span class="search-query">{{card_name}}</span></h1>
+                <form action="/cards/search/page/{{page_number + 1}}" method="POST">
+                    <input type="hidden" name="card-name" value={{card_name}}>
+                    {% if next %}
+                        <button>Next Page</button>
+                    {% else %}
+                        <button disabled>Next Page</button>
+                    {% endif %}
+                    </form>
+            </div>
+            <div class="cards-list-container">
+                {% for card in cards %}
+                    <div class="single-card">
+                        <div class="single-card-img">
+                        <a href="/card/{{card.name}}"><img src={{card.img_url}} alt={{card.name}}></a> 
+                        </div>
+                        <p>{{card.name}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="side-bar">
+            <h1>Header One</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odio nisi! Consequuntur sint consectetur aut ab dolorem soluta earum? Nulla quaerat soluta quod asperiores, autem sint quibusdam et quos accusantium.
+            </p>
+
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde facere sint, voluptatum ipsum sunt iusto a quia sed perspiciatis nesciunt vel eum voluptatem explicabo. Totam rem aperiam labore ea laudantium eaque omnis commodi nesciunt temporibus alias neque perspiciatis distinctio, dolor beatae ipsam voluptates! Accusamus earum, magnam sunt omnis optio consequuntur.
+            </p>
+
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam iusto vel placeat quaerat, et enim ipsum maiores tenetur, dolorem deleniti nihil hic at! Nam quaerat numquam vitae quia totam error magnam cum, quasi libero itaque doloribus nostrum officia est repellat? Error id praesentium velit cumque sapiente maxime voluptatem necessitatibus hic, voluptatibus omnis labore at eveniet magni facilis deleniti est officia obcaecati provident eaque sunt maiores sit? Aliquid perferendis assumenda voluptas!
+            </p>
+        </div>
+    </div>
+</body>
+</html>
