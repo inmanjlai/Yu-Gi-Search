@@ -10,7 +10,7 @@ body, html {
 }
 
 body {
-    background-color: rgb(228, 228, 228);
+    /* background-color: rgb(228, 228, 228); */
     font-family: Arial, Helvetica, sans-serif;
     /* overflow: auto; */
 }
@@ -54,9 +54,15 @@ nav {
 
 .search-bar input {
     padding: 12px;
+    background-color: #694141;
+    color: white;
     width: 40%;
     border: none;
     border-radius: 5px;
+}
+
+.search-bar input::placeholder {
+    color: white;
 }
 
 /*
@@ -68,6 +74,8 @@ nav {
 .content {
     display: flex;
     flex-direction: row;
+    /* background: rgb(64,32,8);
+    background: linear-gradient(180deg, rgba(64,32,8,1) 0%, rgba(252,138,47,1) 100%); */
 }
 
 .content h1 {
@@ -184,58 +192,82 @@ nav {
 ************************************************************************************** 
 */
 
-.card-info {
+.card {
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    color: #515151;
-    height: 100%;
+
+    margin: 20px;
+    padding: 20px;
 }
 
-.card {
+.card-and-sets {
     padding: 20px;
-    margin: 20px;
-    height: 90%;
+    background-color: rgba(248, 248, 248, 1);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-and-sets h2 {
+    padding: 10px;
+    border-bottom: 2px solid rgba(44, 44, 44, 0.3);
+    margin-bottom: 10px;
+}
+
+.card-sets p {
+    padding: 10px;
+}
+
+.desc-and-comments {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-data {
+    background-color: rgba(248, 248, 248, 1);
+    border: 1px solid rgba(44, 44, 44, 0.3);  
+    padding: 20px;
+    font-size: larger;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-data h3 {
+    margin-top: 20px;
 }
 
 .card-type {
     font-weight: 700;
 }
 
-.card-data, .card-sets {
-    display: flex;
-    flex-direction: column;
-    font-size: larger;
-}
-.card-data h3, .card-sets h3{
-    padding: 20px 0 0 20px;
+.card-data h3 ~ p {
+    max-width: 100ch;
+    line-height: 1.6;
 }
 
-.card-data p:last-child {
-    margin-bottom: 10px;
+.comments-container {
+    background-color: rgba(248, 248, 248, 1);
+    border: 1px solid rgba(44, 44, 44, 0.3);  
+    padding: 20px;
+
 }
 
-.card-data p, .card-sets p {
-    padding: 10px 20px;
-    /* color: black; */
-}
 
-.card-data, .card-sets {
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    min-width: 30%;
-    max-width: 30%;
-    min-height: 55%;
-    max-height: 55%;
+.single-comment {
     
-    overflow: auto;
+
 }
 
-.card-data h2, .card-sets h2 {
-    padding: 10px;
-    margin: 10px;
-    border-bottom: 1px solid #7d7d7d;
+.comment-author {
+    font-style: italic;
 }

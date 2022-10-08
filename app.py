@@ -116,7 +116,6 @@ def get_card_sets(card):
         sets.append(set)
 
     return [set.to_dict() for set in sets]
-
 def get_cards_paginated(card_name, page_number):
     cards = Card.query.filter(Card.name.ilike('%' + card_name + '%')).paginate(page=page_number, per_page=50)
     return cards
@@ -125,7 +124,6 @@ def get_cards_paginated(card_name, page_number):
 @app.route("/")
 def home():
     return render_template("home.html")
-
 
 @app.route("/cards/search/page/<int:page_number>", methods=["POST"])
 def search_paginated(page_number):
