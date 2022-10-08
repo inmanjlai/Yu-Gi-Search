@@ -13,14 +13,16 @@
 6. Use ```flask run``` to start the application.
 5. Enjoy!
 
-Seed Database with all YGO cards that currently exist
--> Look into a recurring job that updates it
-https://db.ygoprodeck.com/api/v7/cardinfo.php
 
+##TODO:
 
-Figure out pagination for large returns on multi search
+-Make user login and signup
 
-Make user login and signup
+-Allow users to comment on cards
 
-Make a collection for users
+-Make a collection for users
+
+-Make a deck builder
+
+-Create a forum
 
