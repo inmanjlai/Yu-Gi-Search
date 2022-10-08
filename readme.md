@@ -2,6 +2,7 @@
 
 ### Dependencies needed:
 - PostgreSQL for the database
+- Python and Pip/Pipenv
 - .env file to provide DATABASE_URL variable
 
 1. Clone this repository.
