@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% include "/navbar.html" %}
+
+    <div class="profile-page-content">
+        <div class="profile-left">
+            <h1>{{user.username}}</h1>
+            <h2>{{user.fname}} {{user.lname}}</h2>
+            <h2 class="bio">Biography</h2>
+            <p>{{user.bio}}</p>
+        </div>
+        <div class="profile-right">
+            <div class="users-decks">
+                <h1>User's Decks</h1>
+                {% if not decks %}
+                <div class="no-decks">
+                    <p>No decks made</p>
+                </div>
+                {% else %}
+                <div class="all-decks">
+                    {% for deck in decks %}
+                    <a class="deck-container" href="/decks/{{deck.id}}">
+                        <p>{{deck.name}}</p>
+                        <img src={{deck.cover_img}} alt="">
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="users-comments">
+                <h1>User's Comment History</h1>
+                {% if not comments %}
+                <div class="no-comments">
+                    <p>Lurker detected</p>
+                </div>
+                {% endif %}
+                {% for comment in comments %}
+                    <div class="single-comment-card">
+                        <p>Commented on <a href="/card/{{comment.card.id}}">{{comment.card.name}}</a></p>
+                        <p>{{comment.content}}</p>
+                    </div>    
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

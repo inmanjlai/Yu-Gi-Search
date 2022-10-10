@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>{{deck.name}}</title>
+    <script src="/static//scripts/addCardScript.js" defer></script>
+</head>
+<body>
+    
+    {% include "/navbar.html" %}
+
+    <div class="decklist-page">
+
+        <div class="deck-info">
+            <div>
+                <h1>{{deck.name}}</h1>
+            </div>
+            
+            {% if current_user.id == deck.user_id %}
+                <div class="type-container">
+                    {% if error %}
+                    <p class="error">{{error}}</p>
+                    {% endif %}
+                    <input type="text" name="deckcard-name" autocomplete="off" id="add-card-searchbar" placeholder="Search to add a card...">
+                    <!-- <button class="addbtn">Add to Deck</button> -->
+                    <div class="add-card-dropdown">
+                        <div class="add-card-content">
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="decklist-container">
+            <div class="type-container">
+                <h3>Monsters</h3>
+                {% for card in decklist %}
+                {% if "Monster" in card.type %}
+                <div class="decklist-card">
+                    <p>{{card.quantity}} {{card.name}}</p>
+                    {% if current_user.id == deck.user_id %}
+                    <form action="/decklist/delete" method="POST">
+                        <input type="hidden" name="card-id" value="{{card.id}}">
+                        <input type="hidden" name="deck-id" value="{{deck.id}}">
+                        <button><span class="material-symbols-outlined">close</span></button>
+                    </form>
+                    {% endif %}
+                </div> 
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="type-container">
+                <h3>Spells</h3>
+                {% for card in decklist %}
+                {% if "Spell" in card.type %}
+                <div class="decklist-card">
+                    <p>{{card.quantity}} {{card.name}}</p>
+                    {% if current_user.id == deck.user_id %}
+                    <form action="/decklist/delete" method="POST">
+                        <input type="hidden" name="card-id" value="{{card.id}}">
+                        <input type="hidden" name="deck-id" value="{{deck.id}}">
+                        <button><span class="material-symbols-outlined">close</span></button>
+                    </form>
+                    {% endif %}
+                </div> 
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="type-container">
+                <h3>Traps</h3>
+                {% for card in decklist %}
+                {% if "Trap" in card.type %}
+                <div class="decklist-card">
+                    <p>{{card.quantity}} {{card.name}}</p>
+                    {% if current_user.id == deck.user_id %}
+                    <form action="/decklist/delete" method="POST">
+                        <input type="hidden" name="card-id" value="{{card.id}}">
+                        <input type="hidden" name="deck-id" value="{{deck.id}}">
+                        <button><span class="material-symbols-outlined">close</span></button>
+                    </form>
+                    {% endif %}
+                </div> 
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <p class="total">Total Cards In Deck: {{total}}</p>
+    </div>
+</body>
+</html>
+    
+    
+    
+    
+    
+
+<!-- {% for card in decklist %}
+    {% for i in range(card.quantity) %}
+        {% if deck.user_id == current_user.id %}
+            <form action="/decklist/delete" method="POST">
+                <input type="hidden" name="card-id" value={{card.id}}>
+                <input type="hidden" name="deck-id" value={{deck.id}}>
+                <button class="decklist-single-card">
+                    <img src={{card.img_url}} alt="{{card.name}}">
+                </button>
+            </form>
+        {% else %}
+            <button class="decklist-single-card">
+                <img src={{card.img_url}} alt="{{card.name}}">
+            </button>
+        {% endif %}
+    {% endfor %}
+{% endfor %} -->

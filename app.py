@@ -1,17 +1,29 @@
-from flask import Flask, redirect, render_template, request, json
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, redirect, render_template, request, json, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager, login_user, logout_user, current_user
 import requests
 import os
 
 # CONFIG ->
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 db = SQLAlchemy()
+
+login_manager = LoginManager(app)
+
 db.init_app(app)
 Migrate(app, db)
 
-from models.Card import Card, Set, CardSets
+from models.Card import Card, Set, CardSets, Deck, DeckList
+from models.User import User
+from models.Comment import Comment
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 # UTILITY FUNCTIONS TO REUSE IN API ENDPOINTS ->
 def request_card(card_name):
@@ -93,7 +105,23 @@ def create_card_in_db(card):
 
     create_sets(card)
 
-# FIGURE OUT HOW TO MAKE get_card_by_name A CASE INSENSITIVE QUERY ->
+def get_random_img():
+    random_card = requests.get("https://db.ygoprodeck.com/api/v7/randomcard.php").json()
+    cropped_img = f"https://images.ygoprodeck.com/images/cards_cropped/{random_card['id']}.jpg"
+
+    return cropped_img
+
+def get_cards_comments(card):
+    all_comments = Comment.query.filter(Comment.card_id == card["id"]).order_by(Comment.id.desc()).all()
+
+    print([comment.to_dict() for comment in all_comments])
+    return [comment.to_dict() for comment in all_comments]
+
+def get_users_comments(user_id):
+    comments = Comment.query.order_by(Comment.id.desc()).filter(Comment.user_id == user_id).all()
+
+    return [comment.to_dict() for comment in comments]
+
 def get_card_by_name(card_name):
     card = Card.query.filter(Card.name == card_name).first()
     if card:
@@ -119,16 +147,18 @@ def get_card_sets(card):
 def get_cards_paginated(card_name, page_number):
     cards = Card.query.filter(Card.name.ilike('%' + card_name + '%')).paginate(page=page_number, per_page=50)
     return cards
+def get_search_bar_options(card_name):
+    cards = Card.query.filter(Card.name.ilike(card_name + "%")).limit(10).all()
+    return [{"id": card.id, "name": card.name} for card in cards]   
 
 # APP ROUTES ->
 @app.route("/")
 def home():
     return render_template("home.html")
 
-@app.route("/cards/search/page/<int:page_number>", methods=["POST"])
+@app.route("/cards/search/page/<int:page_number>", methods=["POST", "GET"])
 def search_paginated(page_number):
     card_name = request.form.get("card-name")
-    print("SEARCHING 50 CARDS WITH", card_name, "PAGE:", page_number)
 
     paginated_cards = get_cards_paginated(card_name=card_name, page_number=page_number)
             
@@ -143,34 +173,196 @@ def search_paginated(page_number):
             return render_template("home.html", error="No cards found with given name")
     else:
         if len(paginated_cards.items) == 1:
-                return render_template("card.html", card=paginated_cards.items[0])
+                return redirect(f"/card/{paginated_cards.items[0].id}")
         return render_template(
             "cards.html", 
             cards=paginated_cards.items, 
             card_name=card_name, 
             page_number=paginated_cards.page, 
             prev=paginated_cards.has_prev, 
-            next=paginated_cards.has_next
+            next=paginated_cards.has_next,
+            total=paginated_cards.total,
         )
 
-@app.route("/card/<card_name>")
-def card(card_name):
-    card = get_card_by_name(card_name)
+@app.route("/card/<card_id>")
+def card(card_id):
+    card = Card.query.get(card_id).to_dict()
 
     sets = get_card_sets(card)
+    comments = get_cards_comments(card)
 
     if "Error" not in card:
-        return render_template("card.html", card=card, sets=sets)
+        return render_template("card.html", card=card, sets=sets, comments=comments)
     else:
-        error = f"{card_name} was not found"
+        error = f"{card_id} was not found"
         return render_template("home.html", error=error)
 
+@app.route("/search/names/<card_name>")
+def get_options(card_name):
+    cards = get_search_bar_options(card_name)
+    return cards
+
+#USER ROUTES ->
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+@app.route("/users/create", methods=["POST"])
+def create_user():
+
+    hashed_password = generate_password_hash(request.form.get("password"))
+
+    user = User(
+        fname=request.form.get('fname'),
+        lname=request.form.get('lname'),
+        username=request.form.get('username'),
+        hashed_password=hashed_password,
+        bio=request.form.get('bio'),
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+    login_user(user)
+    return render_template("home.html")
+
+
+@app.route("/login")
+def login_page():
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return render_template("login.html")
+
+@app.route("/users/login", methods=["POST"])
+def login():
+    password = request.form.get("password")
+    username = request.form.get("username")
+    error = "Username or Password is incorrect"
+    user = User.query.filter(User.username == username).first()
+
+    if user:
+        password_is_correct = user.check_password(password)
+        if password_is_correct:
+            login_user(user)
+            return render_template("home.html")       
+    else:
+        return render_template("login.html", error=error)       
+
+@app.route("/users/<int:user_id>")
+def profile_page(user_id):
+    user = User.query.get(user_id)
+    comments = get_users_comments(user_id)
+    users_decks = user.decks
+
+    return render_template("profile.html", user=user, comments=comments, decks=users_decks)
+
+#COMMENT ROUTES ->
+@app.route("/comments", methods=["POST"])
+def post_comment():
+    card_id = request.form.get("card_id")
+    content = request.form.get("content")
+
+    new_comment = Comment(
+        user_id=current_user.id,
+        card_id=card_id,
+        content=content
+    )
+
+    db.session.add(new_comment)
+    db.session.commit()
+
+    return redirect(f"/card/{card_id}")
+
+
+#DECK ROUTES ->
+@app.route("/users/<int:user_id>/decks")
+def users_decks(user_id):
+    decks = Deck.query.filter(Deck.user_id == user_id)
+    return render_template("users-decks.html", decks=decks)
+
+@app.route("/decks", methods=["POST"])
+def create_deck():
+    name = request.form.get("name")
+
+    cover_img = get_random_img()
+
+    deck = Deck(
+        name=name,
+        user_id=current_user.id,
+        cover_img=cover_img
+    )
+
+    db.session.add(deck)
+    db.session.commit()
+
+    return redirect(f"/decks/{deck.id}")
+
+@app.route("/decks/<int:deck_id>", methods=["GET"])
+def get_deck(deck_id):
+    deck = Deck.query.get(deck_id)
+    decklist = deck.get_decklist()
+
+    cards_in_deck = 0
+    for card in decklist:
+        cards_in_deck += card["quantity"]
+
+    print(cards_in_deck)
+
+    return render_template("deck.html", deck=deck, decklist=decklist, total=cards_in_deck)
+
+@app.route("/decks/<int:deck_id>/404")
+def card_not_found(deck_id):
+    deck = Deck.query.get(deck_id)
+    decklist = deck.get_decklist()
+    return render_template("deck.html", deck=deck, decklist=decklist, error="Card not found")
+
+@app.route("/decklist/<int:deck_id>/<int:card_id>", methods=["POST"])
+def add_card_to_decklist(deck_id, card_id):
+    card = Card.query.get(card_id)
+
+    if card:
+        check_if_exists = DeckList.query.filter(DeckList.card_id==card.id, DeckList.deck_id==deck_id).first()
+        if check_if_exists:
+            check_if_exists.quantity = check_if_exists.quantity + 1
+            db.session.commit()
+        else:    
+            new_decklist_update = DeckList(card_id=card.id, deck_id=deck_id)
+            db.session.add(new_decklist_update)
+            db.session.commit()
+
+        return redirect(f"/decks/{deck_id}")
+    else:
+        error = "Card not found"
+        return redirect(f"/decks/{deck_id}/404")
+        
+@app.route("/decklist/delete", methods=["POST"])
+def delete_from_deck():
+    card_id = request.form.get("card-id")
+    deck_id = request.form.get("deck-id")
+    
+    decklist = DeckList.query.filter(DeckList.card_id==card_id, DeckList.deck_id==deck_id).first()
+    if decklist.quantity > 1:
+        decklist.quantity = decklist.quantity - 1
+    else:
+        db.session.delete(decklist)
+    
+    db.session.commit()
+    
+    deck = Deck.query.get(deck_id)
+    decklist = deck.get_decklist()
+    return redirect(f"/decks/{deck_id}")
+
+
+ 
 # @app.route("/fetch_all_cards")
 # def seed():
-    all_cards = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
+#     all_cards = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
 
-    for card in all_cards.json()["data"]:
-        if "card_sets" in card:
-            create_card_in_db(card)
+#     for card in all_cards.json()["data"]:
+#         if "card_sets" in card:
+#             create_card_in_db(card)
 
-    return "CARDS SEEDED"
+#     return "CARDS SEEDED"

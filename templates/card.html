@@ -66,15 +66,22 @@
             </div>
             <div class="comments-container">
                 <h2>Comments</h2>
-                <form action="/create/comment/{{card.id}}">
-                    <textarea name="comment-body" cols="30" rows="10" placeholder="Type a witty comment..."></textarea>
-                </form>
-                <div class="single-comment">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nam distinctio repudiandae ut sapiente vel eius quos quaerat quis odio inventore, sit dolor officia doloribus maxime necessitatibus at accusantium atque?
-                    </p>
-                    <p>Posted by <span class="comment-author">username</span></p>
-                </div>
+                {% if current_user.id %}
+                    <form action="/comments" method="POST">
+                        <input type="hidden" name="card_id" value={{card.id}}>
+                        <textarea name="content" cols="30" rows="5" placeholder="Type a witty comment..."></textarea>
+                        <button>Post</button>
+                    </form>
+                {% else %}
+                    <p class="light-grey">Login to post a comment</p>
+                {% endif %}
+                
+                {% for comment in comments %}
+                    <div class="single-comment">
+                        <p>{{comment.content}}</p>
+                        <p class="posted-by">Posted by <a href="/users/{{comment.user_id}}" class="comment-author">{{comment.user.username}}</a></p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
