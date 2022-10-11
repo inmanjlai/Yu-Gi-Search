@@ -648,6 +648,10 @@ nav {
     /* margin: 20px; */
 }
 
+.profile-page-content h1, h2, h3 {
+    color: #515151;
+}
+
 .profile-left {
     background-color: rgba(248, 248, 248, 1);
     border: 1px solid rgba(44, 44, 44, 0.3);
@@ -814,12 +818,113 @@ nav {
 
 /*
 ************************************************************************************** 
+***************************************HOME PAGE************************************** 
+************************************************************************************** 
+*/
+
+.home-page-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    gap: 20px;
+    height: 90%;
+}
+
+.home-page-container h1 {
+    color: #515151;
+    background-color: rgba(248, 248, 248, 1);
+    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    padding: 20px;
+    border-bottom: 1px solid rgba(44, 44, 44, 0.3);
+}
+
+.recent-comments {
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
+    flex-grow: 1;
+    max-width: 70%;
+}
+
+.recent-decks-container {
+    background-color: rgba(237, 237, 237, 1);
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    min-width: 520px;
+    max-width: 560px;
+    /* width: 100%; */
+    border-radius: 5px;
+    /* max-height: 50%; */
+}
+
+.recent-decks {
+    display: flex;
+    flex-direction: column;
+    color: #515151;
+    min-height: 80%;
+    /* flex-wrap: wrap; */
+    padding: 20px;
+    overflow: auto;
+}
+
+.recent-deck-container {
+    background-color: rgba(248, 248, 248, 1);
+    /* padding: 10px; */
+    margin: 10px;
+    /* width: 45%; */
+    min-height: 200px;
+    max-width: 520px;
+    max-height: 200px;
+    flex-grow: 1;
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    overflow: hidden;
+    object-fit: contain;
+    position: relative;
+}
+
+.recent-deck-container:hover {
+    outline: 3px solid #e8b047;
+    box-shadow: 0 0 20px #ffa200b2;
+}
+
+.recent-deck-container p {
+    font-size: 1rem;
+    color: white;
+    background-color: rgba(44, 44, 44, 0.7);
+    padding: 10px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.recent-deck-container img {
+    height: 200%;
+    width: auto;
+    position: absolute;
+    transform: translateY(250px) translateX(80px) scale(1.5)
+}
+
+/*
+************************************************************************************** 
 ************************************DECKLIST PAGE************************************* 
 ************************************************************************************** 
 */
 
 .total {
     color: #7d7d7d;
+}
+
+.hover-card-display {
+    position: absolute;
+    visibility: hidden;
 }
 
 .error {
@@ -841,6 +946,10 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+.decklist-page h1 {
+    color: #515151;
 }
 
 .deck-info {
@@ -915,7 +1024,7 @@ nav {
 }
 
 .decklist-card p {
-    padding: 5px 10px;
+    padding: 9px 10px;
     font-size: 14px;
 }
 
@@ -930,12 +1039,14 @@ nav {
     border-left: 1px solid rgba(44, 44, 44, 0.3);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 10px;
-    flex-grow: 1;
+    padding: 5px;
+    /* flex-grow: 1; */
+    /* font-size: 12px; */
 }
 
 .decklist-card button:hover {
     background-color: rgb(228, 64, 64);
+    outline: 1px solid rgb(228, 64, 64);
     color: white;
 }
 
@@ -944,6 +1055,7 @@ nav {
     padding: 10px;
     border: 1px solid rgba(44, 44, 44, 0.3);
     border-radius: 5px;
+    background-color: rgba(237, 237, 237, 1);
     /* flex-grow: 1; */
     /* max-width: 400px; */
     /* align-self: flex-end; */

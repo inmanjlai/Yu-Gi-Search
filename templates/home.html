@@ -5,9 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/new_styles.css">
-    <title>Welcome to YGO Search</title>
+    <title>Yu-Gi-Search | Home</title>
 </head>
 <body>
     {% include "/navbar.html" %}
+
+    <div class="home-page-container">
+        <div class="recent-comments">
+            <h1>Recently Posted Comments</h1>
+            <div class="recent-comments-list">
+                {% for comment in recent_comments %}
+                    <div class="single-comment-card">
+                        <p>Commented on <a href="/card/{{comment.card.id}}">{{comment.card.name}}</a></p>
+                        <p>{{comment.content}}</p>
+                        <p class="posted-by">Posted by <a href="/users/{{comment.user_id}}" class="comment-author">{{comment.user.username}}</a></p>
+                    </div>    
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="recent-decks-container">
+            <h1>Recently Created Decks</h1>
+            <div class="recent-decks">
+                {% for deck in recent_decks %}
+                <a class="recent-deck-container" href="/decks/{{deck.id}}">
+                    <p>{{deck.name}}</p>
+                    <img src={{deck.cover_img}} alt="">
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

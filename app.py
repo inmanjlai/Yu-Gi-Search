@@ -3,6 +3,7 @@ from flask import Flask, redirect, render_template, request, json, url_for, flas
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, login_user, logout_user, current_user
+from sqlalchemy import func
 import requests
 import os
 
@@ -151,10 +152,28 @@ def get_search_bar_options(card_name):
     cards = Card.query.filter(Card.name.ilike(card_name + "%")).limit(10).all()
     return [{"id": card.id, "name": card.name} for card in cards]   
 
+def get_random_card():
+    random_card = Card.query.order_by(func.random()).limit(1).first()
+    print(random_card)
+
+    return random_card
+
+def get_recent_comments():
+    recent_comments = Comment.query.order_by(Comment.id.desc()).limit(10).all()
+    return recent_comments
+
+def get_recent_decks():
+    recent_decks = Deck.query.order_by(Deck.id.desc()).limit(10).all()
+    return recent_decks
+
 # APP ROUTES ->
 @app.route("/")
 def home():
-    return render_template("home.html")
+    random_card = get_random_card()
+    recent_comments = get_recent_comments()
+    recent_decks = get_recent_decks()
+
+    return render_template("home.html", random_card=random_card, recent_comments=recent_comments, recent_decks=recent_decks)
 
 @app.route("/cards/search/page/<int:page_number>", methods=["POST", "GET"])
 def search_paginated(page_number):
@@ -224,7 +243,7 @@ def create_user():
     db.session.commit()
 
     login_user(user)
-    return render_template("home.html")
+    return redirect("/")
 
 
 @app.route("/login")
@@ -247,7 +266,7 @@ def login():
         password_is_correct = user.check_password(password)
         if password_is_correct:
             login_user(user)
-            return render_template("home.html")       
+            return redirect("/")       
     else:
         return render_template("login.html", error=error)       
 
@@ -355,7 +374,13 @@ def delete_from_deck():
     decklist = deck.get_decklist()
     return redirect(f"/decks/{deck_id}")
 
+@app.route("/card/<card_name>/img")
+def get_card_img(card_name):
+    card = Card.query.filter(Card.name == card_name).first()
+    
+    print(card.img_url)
 
+    return {"img_url": card.img_url}
  
 # @app.route("/fetch_all_cards")
 # def seed():

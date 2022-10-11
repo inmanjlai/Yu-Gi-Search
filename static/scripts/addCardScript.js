@@ -7,8 +7,6 @@ const deck = {id: 22}
 
 addCardSearchbar.addEventListener("input", async(e) => {
 
-    e.stopPropagation()
-
     const text = addCardSearchbar.value
     const dropdown = document.querySelector(".add-card-dropdown")
 
@@ -39,11 +37,5 @@ window.addEventListener("click", (e) => {
     const dropdown = document.querySelector(".add-card-dropdown")
 
     console.log(e.target)
-
-    // if(e.target !== addCardSearchbar) {
-    //     dropdown.style.opacity = 0
-    //     text = ""
-    //     dropdown.innerHTML = ""
-    // }
 
 })

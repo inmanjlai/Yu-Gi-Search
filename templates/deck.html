@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <title>{{deck.name}}</title>
+    <title>Yu-Gi-Search | {{deck.name}}</title>
     <script src="/static//scripts/addCardScript.js" defer></script>
+    <!-- <script src="/static//scripts/mouseOverCard.js" defer></script> -->
 </head>
 <body>
     
@@ -41,7 +42,7 @@
                 {% for card in decklist %}
                 {% if "Monster" in card.type %}
                 <div class="decklist-card">
-                    <p>{{card.quantity}} {{card.name}}</p>
+                    <p class="cardnamep">{{card.quantity}} <span class="cardnamespan">{{card.name}}</span></p>
                     {% if current_user.id == deck.user_id %}
                     <form action="/decklist/delete" method="POST">
                         <input type="hidden" name="card-id" value="{{card.id}}">
@@ -58,7 +59,7 @@
                 {% for card in decklist %}
                 {% if "Spell" in card.type %}
                 <div class="decklist-card">
-                    <p>{{card.quantity}} {{card.name}}</p>
+                    <p class="cardnamep">{{card.quantity}} <span class="cardnamespan">{{card.name}}</span> </p>
                     {% if current_user.id == deck.user_id %}
                     <form action="/decklist/delete" method="POST">
                         <input type="hidden" name="card-id" value="{{card.id}}">
@@ -75,7 +76,7 @@
                 {% for card in decklist %}
                 {% if "Trap" in card.type %}
                 <div class="decklist-card">
-                    <p>{{card.quantity}} {{card.name}}</p>
+                    <p class="cardnamep">{{card.quantity}}  <span class="cardnamespan">{{card.name}}</span> </p>
                     {% if current_user.id == deck.user_id %}
                     <form action="/decklist/delete" method="POST">
                         <input type="hidden" name="card-id" value="{{card.id}}">
@@ -89,6 +90,9 @@
             </div>
         </div>
         <p class="total">Total Cards In Deck: {{total}}</p>
+        <div class="hover-card-display">
+            <img src="" alt="">
+        </div>
     </div>
 </body>
 </html>
