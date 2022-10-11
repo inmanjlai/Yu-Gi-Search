@@ -21,10 +21,27 @@ Migrate(app, db)
 from models.Card import Card, Set, CardSets, Deck, DeckList
 from models.User import User
 from models.Comment import Comment
+from flask.cli import AppGroup
+
+seed_commands = AppGroup('seed')
+
+def seed_cards():
+    all_cards = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
+
+    for card in all_cards.json()["data"]:
+        if "card_sets" in card:
+            create_card_in_db(card)
+
+@seed_commands.command('all')
+def seed():
+    seed_cards()
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
+app.cli.add_command(seed_commands)
 
 # UTILITY FUNCTIONS TO REUSE IN API ENDPOINTS ->
 def request_card(card_name):
