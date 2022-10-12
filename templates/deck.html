@@ -30,7 +30,9 @@
         <div class="deck-info">
             <div>
                 <h1>{{deck.name}}</h1>
-                <button onclick="openEditDeckModal()" class="editDeckButton">Edit Deck</button>
+                {% if current_user.id == deck.user_id %}
+                    <button onclick="openEditDeckModal()" class="editDeckButton">Edit Deck</button>
+                {% endif %}
             </div>
             
             {% if current_user.id == deck.user_id %}
