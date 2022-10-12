@@ -398,16 +398,3 @@ def get_card_img(card_name):
     print(card.img_url)
 
     return {"img_url": card.img_url}
- 
-@app.route("/fetch_all_cards")
-def seed():
-    all_cards = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
-
-    for card in all_cards.json()["data"]:
-        if "card_sets" in card:
-            create_card_in_db(card)
-
-    return "CARDS SEEDED"
-
-if __name__ == '__main__':
-    app.run()
