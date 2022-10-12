@@ -196,7 +196,17 @@ def home():
 def search_paginated(page_number):
     card_name = request.form.get("card-name")
 
-    paginated_cards = get_cards_paginated(card_name=card_name, page_number=page_number)
+    if card_name.lower().startswith("spell:"):
+        card_name_updated = card_name.replace("spell:", "")
+        paginated_cards = Card.query.filter(Card.type.ilike("%" + "spell" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
+    elif card_name.lower().startswith("monster:"):
+        card_name_updated = card_name.replace("monster:", "")
+        paginated_cards = Card.query.filter(Card.type.ilike("%" + "monster" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
+    elif card_name.lower().startswith("trap:"):
+        card_name_updated = card_name.replace("trap:", "")
+        paginated_cards = Card.query.filter(Card.type.ilike("%" + "trap" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
+    else:
+        paginated_cards = get_cards_paginated(card_name=card_name, page_number=page_number)
             
     if "Error" in paginated_cards:
         fetch_card = request_card(card_name)
