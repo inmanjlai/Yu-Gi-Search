@@ -398,3 +398,13 @@ def get_card_img(card_name):
     print(card.img_url)
 
     return {"img_url": card.img_url}
+
+@app.route("/decks/<int:deck_id>/edit", methods=["POST"])
+def edit_deck(deck_id):
+    deck_name = request.form.get("deck-name")
+    deck = Deck.query.get(deck_id)
+
+    deck.name = deck_name
+    db.session.commit()
+
+    return redirect(f"/decks/{deck.id}")
