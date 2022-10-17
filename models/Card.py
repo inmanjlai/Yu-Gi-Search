@@ -88,13 +88,20 @@ class Deck(db.Model):
 
     def get_decklist(self):
         decklist = DeckList.query.filter(DeckList.deck_id == self.id).all()
-        cards = []
+        main_deck = []
+        extra_deck = []
         for card in decklist:
             card_object = Card.query.get(card.card_id).to_dict()
             card_object["quantity"] = card.quantity
-            cards.append(card_object)
-        
-        return [card for card in cards]
+            if "XYZ" not in card_object["type"] and "Link" not in card_object["type"] and "Fusion" not in card_object["type"] and "Synchro" not in card_object["type"]:
+                main_deck.append(card_object)
+                print(card_object["type"], "\n\n")
+            else:
+                extra_deck.append(card_object)
+
+        deck = {"main_deck": [card for card in main_deck], "extra_deck": [card for card in extra_deck]}
+        print(deck)
+        return deck
 
     def to_dict(self):
         return {

@@ -1,23 +1,35 @@
-let cardDisplay = document.querySelector(".hover-card-display")
+let cardDisplay = document.querySelector(".card-display")
 
-console.log(cardDisplay.children[0].src)
+console.log("HELLO WORLD")
 
-window.addEventListener("mouseover", async(e) => {
-    if(e.target.classList.contains("decklist-card") || e.target.classList.contains("cardnamespan") || e.target.classList.contains("cardnamep")) {
-        let card_to_fetch = e.target.children[0].children[0].innerText
-        let img = await (await fetch(`/card/${card_to_fetch}/img`)).json()
-        console.log(img.img_url)
+const displayCard = (img_url) => {
+    cardDisplay.children[0].src = img_url
+}
 
-        // cardDisplay.style.visibility = "visible"
-        cardDisplay.style.left = e.pageX
-        cardDisplay.style.top = e.pageY
+// const split = window.location.href.split("/")
+// let deck_id = split[split.length - 1]
 
-        cardDisplay.children[0].src = img.img_url
+const addCardQuantity = async(e) => {
+    const card_id = e.target.id.split("add-card-btn-")[1]
 
-        console.log(e.pageX)
-        console.log(cardDisplay.style.left)
+    const card_quantity_span = document.querySelector(`.card-${card_id}-quantity`)
+
+    const req = await (await fetch(`/decklist/add-quantity/${deck_id}/${card_id}`, {method: "POST"})).json()
+
+    card_quantity_span.innerText = req.response
+}
+
+const delCardQuantity = async(e) => {
+    const card_id = e.target.id.split("del-card-btn-")[1]
+    const cardContainer = document.querySelector(`.decklist-card-${card_id}`)
+
+    const card_quantity_span = document.querySelector(`.card-${card_id}-quantity`)
+
+    const req = await (await fetch(`/decklist/del-quantity/${deck_id}/${card_id}`, {method: "POST"})).json()
+
+    if(req.response === 0) {
+        cardContainer.remove()
     }
-    else {
-        cardDisplay.style.visibility = "hidden"
-    }
-})
+
+    card_quantity_span.innerText = req.response
+}

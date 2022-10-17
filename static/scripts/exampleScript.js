@@ -11,7 +11,6 @@ searchbar.addEventListener("input", async(e) => {
         dropdown.innerHTML = ""
         dropdown.style.opacity = 1
         cardList.forEach(card => {  
-            console.log(card.name)
             dropdown.innerHTML += `<a href='/card/${card.id}'>${card.name}</a>`
         })
 

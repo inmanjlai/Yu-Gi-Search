@@ -171,7 +171,6 @@ def get_search_bar_options(card_name):
 
 def get_random_card():
     random_card = Card.query.order_by(func.random()).limit(1).first()
-    print(random_card)
 
     return random_card
 
@@ -186,11 +185,10 @@ def get_recent_decks():
 # APP ROUTES ->
 @app.route("/")
 def home():
-    random_card = get_random_card()
     recent_comments = get_recent_comments()
     recent_decks = get_recent_decks()
 
-    return render_template("home.html", random_card=random_card, recent_comments=recent_comments, recent_decks=recent_decks)
+    return render_template("home.html", recent_comments=recent_comments, recent_decks=recent_decks)
 
 @app.route("/cards/search/page/<int:page_number>", methods=["POST", "GET"])
 def search_paginated(page_number):
@@ -293,7 +291,9 @@ def login():
         password_is_correct = user.check_password(password)
         if password_is_correct:
             login_user(user)
-            return redirect("/")       
+            return redirect("/")    
+        else:
+            return render_template("login.html", error=error) 
     else:
         return render_template("login.html", error=error)       
 
@@ -351,13 +351,36 @@ def get_deck(deck_id):
     deck = Deck.query.get(deck_id)
     decklist = deck.get_decklist()
 
-    cards_in_deck = 0
-    for card in decklist:
-        cards_in_deck += card["quantity"]
+    main_deck_length = 0
+    for card in decklist['main_deck']:
+        main_deck_length += card["quantity"]
 
-    print(cards_in_deck)
+    extra_deck_length = 0
+    for card in decklist['extra_deck']:
+        extra_deck_length += card["quantity"]
 
-    return render_template("deck.html", deck=deck, decklist=decklist, total=cards_in_deck)
+    return render_template("deck.html", deck=deck, decklist=decklist, main_deck_length=main_deck_length, extra_deck_length=extra_deck_length)
+
+@app.route("/decklist/add-quantity/<int:deck_id>/<int:card_id>", methods=["POST"])
+def add_card_quantity(deck_id, card_id):
+    decklist = DeckList.query.filter(DeckList.card_id==card_id, DeckList.deck_id==deck_id).first()
+    decklist.quantity += 1
+
+    db.session.commit()
+    return {"response": decklist.quantity}
+
+@app.route("/decklist/del-quantity/<int:deck_id>/<int:card_id>", methods=["POST"])
+def del_card_quantity(deck_id, card_id):
+    decklist = DeckList.query.filter(DeckList.card_id==card_id, DeckList.deck_id==deck_id).first()
+    if decklist.quantity == 1:
+        db.session.delete(decklist)
+        db.session.commit()
+        return {"response": 0}
+    else:
+        decklist.quantity -= 1
+        db.session.commit()
+        return {"response": decklist.quantity}
+
 
 @app.route("/decks/<int:deck_id>/404")
 def card_not_found(deck_id):

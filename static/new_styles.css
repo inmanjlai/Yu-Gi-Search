@@ -922,11 +922,6 @@ nav {
     color: #7d7d7d;
 }
 
-.hover-card-display {
-    position: absolute;
-    visibility: hidden;
-}
-
 .error {
     background-color: rgb(209, 65, 65);
     padding: 10px;
@@ -939,11 +934,12 @@ nav {
 }
 
 .decklist-page {
-    height: 80%;
-    width: 100%;
+    /* margin: 20px; */
+    min-height: 80%;
+    width: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 20px;
 }
@@ -955,18 +951,26 @@ nav {
 .deck-info {
     display: flex;
     flex-direction: row;
-    width: 90%;
-    max-width: 1400px;
+    /* width: 50%; */
+    width: 100%;
+    /* max-width: 1100px; */
     gap: 20px;
     justify-content: space-between;
     align-items: flex-end;
+    background-color: rgba(237, 237, 237, 1);
+    padding: 20px;
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    /* border-radius: 5px; */
+    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10000;
 }
 
 .deck-info > div {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 70ch;
 }
 
 
@@ -985,28 +989,71 @@ nav {
     cursor: pointer;
 }
 
+.decklist-area {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    min-height: 90%;
+}
+
+.card-display {
+    background-color: rgba(237, 237, 237, 1);
+    height: max-content;
+    padding: 20px;
+    position: sticky;
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    top: 100px;
+    z-index: 1;
+}
+
 .decklist-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 10px;
     padding: 20px;
+    min-width: 489px;
     background-color: rgb(237, 237, 237);
     border-radius: 5px;
     border: 1px solid rgba(44, 44, 44, 0.3);
-    /* max-height: 80%; */
-    min-height: 50%;
     box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
-    max-width: 1400px;
-    width: 90%;
+    max-width: 1100px;
+    align-items: flex-start;
+    justify-content: flex-start;
     overflow: auto;
 }
+
+.card-types {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* width: 100%; */
+    height: max-content;
+    max-width: 500px;
+    width: 100%;
+    gap: 10px;
+    padding: 10px;
+}
+
+.card-btns {
+    display: flex;
+    flex-direction: row;
+    /* outline: 2px solid red; */
+}
+
+.card-btns form {
+    width: 50%;
+}
+
 
 .type-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     max-width: 33%;
     position: relative;
 }
@@ -1021,6 +1068,13 @@ nav {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    width: 100%;
+    max-width: 500px;
+    /* max-width: 50%; */
+}
+
+.type-h3 {
+    max-width: 40%;
 }
 
 .decklist-card p {
@@ -1028,7 +1082,7 @@ nav {
     font-size: 14px;
 }
 
-.decklist-card button {
+#delete-btn{
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -1044,7 +1098,7 @@ nav {
     /* font-size: 12px; */
 }
 
-.decklist-card button:hover {
+#delete-btn:hover {
     background-color: rgb(228, 64, 64);
     outline: 1px solid rgb(228, 64, 64);
     color: white;
@@ -1055,7 +1109,7 @@ nav {
     padding: 10px;
     border: 1px solid rgba(44, 44, 44, 0.3);
     border-radius: 5px;
-    background-color: rgba(237, 237, 237, 1);
+    background-color: rgba(248, 248, 248, 1);
     flex-grow: 1;
     /* max-width: 400px; */
     /* align-self: flex-end; */
@@ -1071,9 +1125,9 @@ nav {
     flex-direction: column;
     align-items: flex-start;
     box-shadow: 0 3px 10px rgba(44, 44, 44, 0.3);
-    z-index: 10;
+    z-index: 10000;
     width: 100%;
-    opacity: 0;
+    display: none;
 }
 
 .add-card-dropdown form {
@@ -1164,6 +1218,37 @@ nav {
 .deck-info > div {
     display: flex;
     flex-direction: row;
+    /* justify-content: space-between; */
     gap: 10px;
     flex-grow: 1;
+}
+
+#add-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, color 0.2s;
+    border-left: 1px solid rgba(44, 44, 44, 0.3);
+    padding: 5px;
+}
+
+#add-btn:hover {
+    background-color: rgb(85, 204, 228);
+    outline: 1px solid rgb(85, 204, 228);
+    color: white;
+}
+
+@media screen and (min-width: 1700px) {
+
+
+
+    .decklist-container {
+        max-height: 1600px;
+        flex-wrap: wrap;
+        flex-grow: 1;
+    }
+
 }

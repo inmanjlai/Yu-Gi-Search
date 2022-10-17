@@ -8,7 +8,7 @@
     <title>Yu-Gi-Search | {{deck.name}}</title>
     <script src="/static//scripts/addCardScript.js" defer></script>
     <script src="/static//scripts/editDeck.js" defer></script>
-    <!-- <script src="/static//scripts/mouseOverCard.js" defer></script> -->
+    <script src="/static//scripts/mouseOverCard.js" defer></script>
 </head>
 <body>
     
@@ -31,7 +31,7 @@
             <div>
                 <h1>{{deck.name}}</h1>
                 {% if current_user.id == deck.user_id %}
-                    <button onclick="openEditDeckModal()" class="editDeckButton">Edit Deck</button>
+                    <button onclick="openEditDeckModal()" class="editDeckButton">Change Name</button>
                 {% endif %}
             </div>
             
@@ -51,86 +51,118 @@
             {% endif %}
         </div>
         
-        <div class="decklist-container">
-            <div class="type-container">
-                <h3>Monsters</h3>
-                {% for card in decklist %}
-                {% if "Monster" in card.type %}
-                <div class="decklist-card">
-                    <p class="cardnamep">{{card.quantity}} <span class="cardnamespan">{{card.name}}</span></p>
-                    {% if current_user.id == deck.user_id %}
-                    <form action="/decklist/delete" method="POST">
-                        <input type="hidden" name="card-id" value="{{card.id}}">
-                        <input type="hidden" name="deck-id" value="{{deck.id}}">
-                        <button><span class="material-symbols-outlined">close</span></button>
-                    </form>
+        
+        <div class="decklist-area">
+            <div class="decklist-container">
+                <div class="card-types">
+                    <h3 class="type-h3">Monsters</h3>
+                    {% for card in decklist.main_deck %}
+                    {% if "Monster" in card.type %}
+                    <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
+                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        {% if current_user.id == deck.user_id %}
+                        <div class="card-btns">
+                            <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="add-btn"><span class="material-symbols-outlined" id="{{card.id}}">add</span></button>
+                            </form>
+                            <form onsubmit="event.preventDefault(); delCardQuantity(event)" id="del-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="delete-btn"><span class="material-symbols-outlined" id="{{card.id}}">close</span></button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div> 
                     {% endif %}
-                </div> 
-                {% endif %}
-                {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="card-types">
+    
+                    <h3 class="type-h3">Spells</h3>
+                    {% for card in decklist.main_deck %}
+                    {% if "Spell" in card.type %}
+                    <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
+                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        {% if current_user.id == deck.user_id %}
+                        <div class="card-btns">
+                            <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="add-btn"><span class="material-symbols-outlined" id="{{card.id}}">add</span></button>
+                            </form>
+                            <form onsubmit="event.preventDefault(); delCardQuantity(event)" id="del-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="delete-btn"><span class="material-symbols-outlined" id="{{card.id}}">close</span></button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div> 
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="card-types">
+                    <h3 class="type-h3">Traps</h3>
+                    {% for card in decklist.main_deck %}
+                    {% if "Trap" in card.type %}
+                    <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
+                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        {% if current_user.id == deck.user_id %}
+                        <div class="card-btns">
+                            <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="add-btn"><span class="material-symbols-outlined" id="{{card.id}}">add</span></button>
+                            </form>
+                            <form onsubmit="event.preventDefault(); delCardQuantity(event)" id="del-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="delete-btn"><span class="material-symbols-outlined" id="{{card.id}}">close</span></button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div> 
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="card-types">
+                    <h3 class="type-h3">Extra Deck</h3>
+                    {% for card in decklist.extra_deck %}
+                    <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
+                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        {% if current_user.id == deck.user_id %}
+                        <div class="card-btns">
+                            <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="add-btn"><span class="material-symbols-outlined" id="{{card.id}}">add</span></button>
+                            </form>
+                            <form onsubmit="event.preventDefault(); delCardQuantity(event)" id="del-card-btn-{{card.id}}">
+                                <input type="hidden" name="card-id" value="{{card.id}}">
+                                <input type="hidden" name="deck-id" value="{{deck.id}}">
+                                <button id="delete-btn"><span class="material-symbols-outlined" id="{{card.id}}">close</span></button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div> 
+                    {% endfor %}
+                </div>
             </div>
-            <div class="type-container">
-                <h3>Spells</h3>
-                {% for card in decklist %}
-                {% if "Spell" in card.type %}
-                <div class="decklist-card">
-                    <p class="cardnamep">{{card.quantity}} <span class="cardnamespan">{{card.name}}</span> </p>
-                    {% if current_user.id == deck.user_id %}
-                    <form action="/decklist/delete" method="POST">
-                        <input type="hidden" name="card-id" value="{{card.id}}">
-                        <input type="hidden" name="deck-id" value="{{deck.id}}">
-                        <button><span class="material-symbols-outlined">close</span></button>
-                    </form>
-                    {% endif %}
-                </div> 
+            
+            <div class="card-display">
+                {% if decklist.main_deck[0] != undefined %}
+                <img src="{{decklist.main_deck[0].img_url}}" alt="Current Hovered Card">
+                {% else %}
+                <img width="421" height="614" src="http://duellinks.gamea.co/file/qa/umi92hxs/q/378a9b0ac81d00d6712dcaef1f188ec012508179_1.jpg" alt="">
                 {% endif %}
-                {% endfor %}
-            </div>
-            <div class="type-container">
-                <h3>Traps</h3>
-                {% for card in decklist %}
-                {% if "Trap" in card.type %}
-                <div class="decklist-card">
-                    <p class="cardnamep">{{card.quantity}}  <span class="cardnamespan">{{card.name}}</span> </p>
-                    {% if current_user.id == deck.user_id %}
-                    <form action="/decklist/delete" method="POST">
-                        <input type="hidden" name="card-id" value="{{card.id}}">
-                        <input type="hidden" name="deck-id" value="{{deck.id}}">
-                        <button><span class="material-symbols-outlined">close</span></button>
-                    </form>
-                    {% endif %}
-                </div> 
-                {% endif %}
-                {% endfor %}
             </div>
         </div>
-        <p class="total">Total Cards In Deck: {{total}}</p>
+        <p class="total">Main Deck: {{main_deck_length}} - Extra Deck: {{extra_deck_length}}</p>
         <div class="hover-card-display">
             <img src="" alt="">
         </div>
     </div>
 </body>
 </html>
-    
-    
-    
-    
-    
-
-<!-- {% for card in decklist %}
-    {% for i in range(card.quantity) %}
-        {% if deck.user_id == current_user.id %}
-            <form action="/decklist/delete" method="POST">
-                <input type="hidden" name="card-id" value={{card.id}}>
-                <input type="hidden" name="deck-id" value={{deck.id}}>
-                <button class="decklist-single-card">
-                    <img src={{card.img_url}} alt="{{card.name}}">
-                </button>
-            </form>
-        {% else %}
-            <button class="decklist-single-card">
-                <img src={{card.img_url}} alt="{{card.name}}">
-            </button>
-        {% endif %}
-    {% endfor %}
-{% endfor %} -->

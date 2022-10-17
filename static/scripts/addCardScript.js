@@ -3,8 +3,6 @@ const addCardSearchbar = document.querySelector("#add-card-searchbar")
 const split = window.location.href.split("/")
 let deck_id = split[split.length - 1]
 
-const deck = {id: 22}
-
 addCardSearchbar.addEventListener("input", async(e) => {
 
     const text = addCardSearchbar.value
@@ -15,7 +13,7 @@ addCardSearchbar.addEventListener("input", async(e) => {
         cardList = await listOfCards.json()
 
         dropdown.innerHTML = ""
-        dropdown.style.opacity = 1
+        dropdown.style.display = "flex"
         cardList.forEach(card => {  
             dropdown.innerHTML += `
                 <form action="/decklist/${deck_id}/${card.id}" method="POST">
@@ -28,14 +26,12 @@ addCardSearchbar.addEventListener("input", async(e) => {
 
     if (text.length === 0) {
         dropdown.innerHTML = ""
-        dropdown.style.opacity = 0
+        dropdown.style.display = "none"
     }    
 })
 
 window.addEventListener("click", (e) => {
     let text = addCardSearchbar.value
     const dropdown = document.querySelector(".add-card-dropdown")
-
-    console.log(e.target)
 
 })
