@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/new_styles.css">
     <script src="/static/scripts/exampleScript.js" defer></script>
+    <script src="/static/scripts/menu.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
     <title>Yu-Gi-Search</title>
 </head>
 <body>
     {% block navbar %}
         <nav>
-            <h1><a href="/">Yu-Gi-Search</a></h1>
+            <h1 class="logo"><a href="/">Yu-Gi-Search</a></h1>
             <div class="search-bar">
                 <form action="/cards/search/page/1", method="POST" id="nav-search-form" autocomplete="off">
                     <input type="text" placeholder="Search for a card..." name="card-name" autocomplete="off">
@@ -28,7 +30,21 @@
                     <a href="/users/{{current_user.id}}">{{current_user.username}}</a>
                     <a href="/logout">Logout</a>
                 {% endif %}
-
+            </div>
+            <div class="menu-btn-container">
+                <p class="deckbtn">New Deck</p>
+                <button class="menu-btn"><span class="material-symbols-outlined">menu</span></button>
+                <div class="menu-btn-dropdown">
+                    {% if not current_user.id %}
+                        <a href="/">Home</a>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+                        {% else %}
+                        <a href="/">Home</a>
+                        <a href="/users/{{current_user.id}}">{{current_user.username}}</a>
+                        <a href="/logout">Logout</a>
+                    {% endif %}
+                </div>
             </div>
 
             <div class="deck-modal">

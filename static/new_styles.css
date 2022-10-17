@@ -178,7 +178,89 @@ nav {
     text-decoration: underline;
 }
 
+.menu-btn-container {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: max-content;
+    display: none;
+    gap: 20px;
+}
 
+.menu-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-btn span {
+    font-size: 36px;
+}
+
+.menu-btn-dropdown {
+    position: absolute;
+    background-color: rgba(237, 237, 237, 1);
+    border-radius: 5px;
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    top: 0px;
+    left: 0px;
+    color: white;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 44, 44, 0.7);
+    z-index: 99999999;
+    backdrop-filter: blur(8px);
+    font-size: 24px;
+    visibility: hidden;
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .logo {
+        display: none;
+    }
+
+    .links {
+        display: none;
+    }
+
+    .search-bar {
+        margin: 0;
+    }
+
+    .menu-btn-container {
+        display: flex;
+    }
+
+    .menu-btn-dropdown a, .menu-btn-dropdown p {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        transition: background-color 0.2s;
+    }
+    
+    .menu-btn-dropdown a:active, .menu-btn-dropdown p:active {
+        background-color: rgba(248, 248, 248, 1);
+        color: black;
+    }
+
+    #nav-search-form input {
+        width: 90%;
+    }
+
+    #nav-search-dropdown {
+        width: 90%;
+    }
+}
 
 /*
 ************************************************************************************** 
@@ -470,6 +552,7 @@ nav {
     border-radius: 5px;
     background-color: rgba(248, 248, 248, 1);
     margin: 10px;
+    word-break: break-all;
 }
 
 .posted-by {
@@ -492,11 +575,13 @@ nav {
     }
 
     .desc-and-comments {
+        width: 100%;
         margin: 20px 0 0 0;
     }
 
     .card-and-sets {
         position: static;
+        margin: 0;
     }
 
     .card-data h1 {
@@ -782,6 +867,7 @@ nav {
     border: 1px solid rgba(44, 44, 44, 0.3);
     border-radius: 5px;
     margin: 10px;
+    word-break: break-all;
 }
 
 .single-comment-card p:first-child {
@@ -816,6 +902,27 @@ nav {
     height: 75%;
 }
 
+@media screen and (max-width: 900px) {
+    .profile-page-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-left {
+        height: 800px;
+        max-height: 400px;
+        width: 100%;
+        max-width: 90%;
+        font-size: large;
+        overflow: auto;
+
+    }
+
+    .users-comments {
+        min-height: max-content;
+        height: max-content
+    }
+}
 
 /*
 ************************************************************************************** 
@@ -828,7 +935,7 @@ nav {
     justify-content: center;
     margin: 20px;
     gap: 20px;
-    height: 90%;
+    min-height: 90%;
 }
 
 .home-page-container h1 {
@@ -911,6 +1018,23 @@ nav {
     width: auto;
     position: absolute;
     transform: translateY(250px) translateX(80px) scale(1.5)
+}
+
+@media screen and (max-width: 900px) {
+    .home-page-container {
+        flex-direction: column;
+    }  
+
+    .recent-comments {
+        max-width: 100%;
+        overflow: auto;
+    }
+
+    .recent-decks-container {
+        width: 100%;
+        min-width: 100%;
+        overflow: auto;
+    }
 }
 
 /*
@@ -1008,6 +1132,8 @@ nav {
     top: 100px;
     z-index: 1;
 }
+
+
 
 .decklist-container {
     display: flex;
@@ -1253,3 +1379,38 @@ nav {
     }
 
 }
+
+@media screen and (max-width: 900px) {
+    .card-display {
+        display: none;
+    }
+
+    .decklist-container {
+        width: 90%;
+        min-width: 0px;
+    }
+
+    .deck-info {
+        font-size: xx-small;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .deck-info > div {
+        display: flex;
+        flex-direction: row;
+        /* justify-content: center; */
+        align-items: center;
+    }
+
+    .editDeckButton {
+        font-size: 10px;
+    }
+
+    #add-card-searchbar {
+        width: 100%;
+    }
+}
+
