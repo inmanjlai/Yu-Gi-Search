@@ -76,6 +76,7 @@ nav {
 
 #nav-search-form {
     position: relative;
+    z-index: 1000000;
 }
 
 #nav-search-dropdown {
@@ -86,7 +87,7 @@ nav {
     display: flex;
     flex-direction: column;
     width: 60%;
-    z-index: 10;
+    z-index: 100000;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-top: none;
