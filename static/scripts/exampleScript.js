@@ -26,9 +26,13 @@ window.onclick = (e) => {
 let text = searchbar.elements[0].value
 const dropdown = document.querySelector("#nav-search-dropdown")
 const modal = document.querySelector(".deck-modal")
-const deckbtn = document.querySelector(".deckbtn")
+let deckbtn = document.querySelector(".deckbtn")
+let mobileDeckBtn = document.querySelector(".menudeckbtn")
 
-    if(e.target === deckbtn){
+    console.log(e.target)
+
+    if(e.target === deckbtn || e.target === mobileDeckBtn){
+        console.log("CLicked")
         modal.style.opacity = 1
         modal.style.pointerEvents = 'auto'
     } else if (e.target === modal) {

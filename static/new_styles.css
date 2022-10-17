@@ -260,6 +260,10 @@ nav {
     #nav-search-dropdown {
         width: 90%;
     }
+
+    .deck-modal-content {
+        width: 80%;
+    }
 }
 
 /*
