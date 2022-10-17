@@ -1157,7 +1157,7 @@ nav {
     height: 100%;
     width: 100%;
     background-color: rgba(44, 44, 44, 0.7);
-    z-index: 1000;
+    z-index: 9999999;
     visibility: hidden;
     display: flex;
     justify-content: center;
