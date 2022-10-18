@@ -722,6 +722,22 @@ nav {
     cursor:default;
 }
 
+@media screen and (max-width: 900px) {
+    .join-us {
+        display: none;
+    }
+
+    .register-form-container {
+        width: 90%;
+    }
+
+    .register-page-content {
+        height: 80%;
+        align-items: flex-start;
+        margin-top: 40px;
+    }
+}
+
 /*
 ************************************************************************************** 
 ************************************PROFILE PAGE************************************** 
