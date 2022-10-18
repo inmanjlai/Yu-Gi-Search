@@ -32,7 +32,7 @@
                 {% endif %}
             </div>
             <div class="menu-btn-container">
-                {% if not current_user.id %}
+                {% if current_user.id %}
                     <p class="menudeckbtn">New Deck</p>
                 {% endif %}
                 <button class="menu-btn"><span class="material-symbols-outlined">menu</span></button>
