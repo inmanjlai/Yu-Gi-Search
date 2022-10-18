@@ -166,7 +166,7 @@ def get_cards_paginated(card_name, page_number):
     cards = Card.query.filter(Card.name.ilike('%' + card_name + '%')).paginate(page=page_number, per_page=50)
     return cards
 def get_search_bar_options(card_name):
-    cards = Card.query.filter(Card.name.ilike(card_name + "%")).limit(10).all()
+    cards = Card.query.filter(Card.name.ilike("%" + card_name + "%")).limit(10).all()
     return [{"id": card.id, "name": card.name} for card in cards]   
 
 def get_random_card():
