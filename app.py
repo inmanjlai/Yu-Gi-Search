@@ -390,23 +390,29 @@ def card_not_found(deck_id):
 
 @app.route("/decklist/<int:deck_id>/<int:card_id>", methods=["POST"])
 def add_card_to_decklist(deck_id, card_id):
-    card = Card.query.get(card_id)
 
-    if card:
-        check_if_exists = DeckList.query.filter(DeckList.card_id==card.id, DeckList.deck_id==deck_id).first()
-        if check_if_exists:
-            check_if_exists.quantity = check_if_exists.quantity + 1
-            db.session.commit()
-        else:    
-            new_decklist_update = DeckList(card_id=card.id, deck_id=deck_id)
-            db.session.add(new_decklist_update)
-            db.session.commit()
+    deck = Deck.query.get(deck_id)
+    if current_user == Deck.user_id:
+        card = Card.query.get(card_id)
 
-        return redirect(f"/decks/{deck_id}")
+        if card:
+            check_if_exists = DeckList.query.filter(DeckList.card_id==card.id, DeckList.deck_id==deck_id).first()
+            
+            if check_if_exists:
+                check_if_exists.quantity = check_if_exists.quantity + 1
+                db.session.commit()
+            else:    
+                new_decklist_update = DeckList(card_id=card.id, deck_id=deck_id)
+                db.session.add(new_decklist_update)
+                db.session.commit()
+
+            return redirect(f"/decks/{deck_id}")
+        else:
+            error = "Card not found"
+            return redirect(f"/decks/{deck_id}/404")
     else:
-        error = "Card not found"
-        return redirect(f"/decks/{deck_id}/404")
-        
+        return 401
+            
 @app.route("/decklist/delete", methods=["POST"])
 def delete_from_deck():
     card_id = request.form.get("card-id")
