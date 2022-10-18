@@ -391,8 +391,11 @@ def card_not_found(deck_id):
 @app.route("/decklist/<int:deck_id>/<int:card_id>", methods=["POST"])
 def add_card_to_decklist(deck_id, card_id):
 
+    print("HLELO")
     deck = Deck.query.get(deck_id)
-    if current_user == Deck.user_id:
+    print(current_user.id, deck.user_id)
+
+    if current_user.id == deck.user_id:
         card = Card.query.get(card_id)
 
         if card:
