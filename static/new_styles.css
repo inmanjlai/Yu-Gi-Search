@@ -1,3 +1,15 @@
+:root {
+    --high-dark: rgba(24, 24, 24, 1);
+    --mid-dark: rgb(33, 33, 33);
+    --low-dark: rgb(61, 61, 61);
+    --border-dark: rgba(44, 44, 44, 0.5);
+    /* --border-mid: rgba(33, 33, 33, 1); */
+    --border-light: rgba(44, 44, 44, 0.1);
+    --heading-text: rgb(200, 200, 200);
+    --accent-color: rgb(148, 75, 250);
+    --accent-lighter: rgba(185, 136, 255, 0.848);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,12 +19,14 @@
 body, html {
     width: 100%;
     height: 100%;
+    color: rgb(193, 193, 193);
 }
 
 body {
     /* background-color: rgb(228, 228, 228); */
     font-family: Arial, Helvetica, sans-serif;
     /* overflow: auto; */
+    background-color: var(--high-dark);
 }
 
 a {
@@ -21,7 +35,7 @@ a {
 }
 
 .light-grey {
-    color: #7d7d7d;
+    color: var(--heading-text);
     padding: 10px;
     text-align: center;
     margin: 20px;
@@ -33,8 +47,12 @@ a {
 ************************************************************************************** 
 */
 
+.logo {
+    color: var(--accent-color);
+}
+
 nav {
-    background-color: #e8b047;
+    background-color: var(--low-dark);
     /* background-color: #ab5b5b; */
     color: white;
     padding: 20px;
@@ -63,7 +81,7 @@ nav {
 .search-bar input {
     padding: 12px;
     /* background-color: #695b41; */
-    background-color: #af863a;
+    background-color: var(--mid-dark);
     color: white;
     width: 60%;
     border: none;
@@ -81,9 +99,9 @@ nav {
 
 #nav-search-dropdown {
     position: absolute;
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    color: black;
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);
+    color: rgba(200, 200, 200, 1);
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -101,7 +119,7 @@ nav {
 }
 
 #nav-search-dropdown a:hover {
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
 }
 
 .deck-modal {
@@ -110,7 +128,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(44, 44, 44, 0.5);
+    background-color: var(--border-dark);
     z-index: 9999999;
     display: flex;
     flex-direction: column;
@@ -121,17 +139,17 @@ nav {
 }
 
 .deck-modal-content {
-    background-color: rgb(237, 237, 237);
+    background-color: var(--low-dark);
     width: 30%;
     height: max-content;
     border-radius: 5px;
     max-width: 400px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
+    box-shadow: 0 3px 10px var(--border-mid);
 }
 
 .deck-modal-content form {
-    color: black;
+    color: rgb(200, 200, 200);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,7 +168,7 @@ nav {
 .deck-modal-content input, .deck-modal-content textarea {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     width: 100%;
     border-radius: 5px;
     resize: none;
@@ -158,7 +176,7 @@ nav {
 
 .deck-modal-content button {
     padding: 10px;
-    background-color: #e8b047;
+    background-color: var(--accent-color);
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -167,7 +185,7 @@ nav {
 }
 
 .deck-modal-content button:hover {
-    background-color: #f1d092;
+    background-color: var(--accent-lighter);
 }
 
 .deckbtn {
@@ -200,10 +218,10 @@ nav {
 
 .menu-btn-dropdown {
     position: absolute;
-    background-color: rgba(237, 237, 237, 1);
+    background-color: var(--mid-dark);
     border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    border: 1px solid var(--border-mid);
+    box-shadow: 0 3px 10px var(--border-light);
     top: 0px;
     left: 0px;
     color: white;
@@ -249,7 +267,7 @@ nav {
     }
     
     .menu-btn-dropdown a:active, .menu-btn-dropdown p:active {
-        background-color: rgba(248, 248, 248, 1);
+        background-color: var(--low-dark);
         color: black;
     }
 
@@ -278,16 +296,16 @@ nav {
 }
 
 .content h1 {
-    color: #515151;
+    color: var(--heading-text);
 }
 
 .search-query {
-    color: #e8b047;
+    color: var(--accent-color);
 }
 
 .search-results {
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     width: 100%;
     margin: 20px;
@@ -314,7 +332,7 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    color: #7d7d7d;
+    color: var(--heading-text);
     justify-content: center;
     align-items: center;
 }
@@ -337,13 +355,13 @@ nav {
     gap: 20px;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     width: 100%;
     position: sticky;
     top: 0;
     padding: 20px;
     border-bottom: 2px solid rgba(44, 44, 44, 0.2);
-    box-shadow: 0px 3px 10px rgba(44, 44, 44, 0.1);
+    box-shadow: 0px 3px 10px var(--border-light);
 }
 
 .number-of-results {
@@ -354,13 +372,13 @@ nav {
 }
 
 .number-of-results p {
-    color: #7d7d7d;
+    color: var(--heading-text);
 }
 
 .page-numbers button {
     border: none;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    background-color: rgba(248, 248, 248, 1);
+    border: 1px solid var(--border-mid);
+    background-color: var(--low-dark);
     border-radius: 5px;
     
     padding: 15px;
@@ -368,15 +386,15 @@ nav {
 }
 
 .page-numbers button:hover {
-    background-color: rgb(237, 237, 237);
+    background-color: var(--mid-dark);
 }
 
 .page-numbers button:disabled{
-    background-color: rgb(237, 237, 237);
+    background-color: var(--mid-dark);
 }
 
 .page-numbers button:disabled:hover {
-    background-color: rgb(237, 237, 237);
+    background-color: var(--mid-dark);
 }
 
 
@@ -392,8 +410,8 @@ nav {
     margin: 20px;
     height: max-content;
 
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
 
     display: flex;
@@ -414,8 +432,8 @@ nav {
 }
 
 .card {
-    /* background-color: rgb(237, 237, 237); */
-    /* border: 1px solid rgba(44, 44, 44, 0.3); */
+    /* background-color: var(--mid-dark); */
+    /* border: 1px solid var(--border-mid); */
     border-radius: 5px;
     display: flex;
 
@@ -425,8 +443,8 @@ nav {
 
 .card-and-sets {
     padding: 20px;
-    background-color: rgba(248, 248, 248, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--low-dark);
+    border: 1px solid var(--border-mid);
     position: sticky;
     top: 20px;
     display: flex;
@@ -442,7 +460,7 @@ nav {
 
 .card-and-sets h2 {
     padding: 10px;
-    border-bottom: 2px solid rgba(44, 44, 44, 0.3);
+    border-bottom: 2px solid var(--border-mid);
     margin-bottom: 10px;
 }
 
@@ -460,8 +478,8 @@ nav {
 }
 
 .card-data {
-    background-color: rgba(237, 237, 237, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);  
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);  
     border-radius: 5px;
     box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
     font-size: larger;
@@ -473,9 +491,9 @@ nav {
 }
 
 .card-data h1 {
-    border-bottom: 1px solid rgba(44, 44, 44, 0.3);
-    background-color: rgba(248, 248, 248, 1);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    border-bottom: 1px solid var(--border-mid);
+    background-color: var(--low-dark);
+    box-shadow: 0 3px 10px var(--border-light);
     padding: 20px;
 }
 
@@ -498,8 +516,8 @@ nav {
 }
 
 .comments-container {
-    background-color: rgba(237, 237, 237, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);  
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);  
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -511,9 +529,9 @@ nav {
 
 .comments-container h2 {
     padding: 20px;
-    border-bottom: 1px solid rgba(44, 44, 44, 0.3);
-    background-color: rgba(248, 248, 248, 1);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    border-bottom: 1px solid var(--border-mid);
+    background-color: var(--low-dark);
+    box-shadow: 0 3px 10px var(--border-light);
 }
 
 .comments-container form {
@@ -529,12 +547,12 @@ nav {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     border-radius: 5px;
-    background-color: rgba(248, 248, 248, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--low-dark);
+    border: 1px solid var(--border-mid);
 }
 
 .comments-container form button {
-    background-color: #e8b047;
+    background-color: var(--accent-color);
     padding: 10px 16px;
     align-self: flex-end;
     border: none;
@@ -552,9 +570,9 @@ nav {
     flex-direction: column;
     gap: 5px;
     padding: 20px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     margin: 10px;
     word-break: break-all;
 }
@@ -562,11 +580,11 @@ nav {
 .posted-by {
     align-self: flex-end;
     font-style: italic;
-    color: #7d7d7d;
+    color: var(--heading-text);
 }
 
 .comment-author:hover {
-    color:#e8b047;
+    color:var(--accent-color);
     text-decoration: underline;
     cursor: pointer;
 }
@@ -612,13 +630,13 @@ nav {
 */
 
 .register-form-container {
-    background-color: rgb(237, 237, 237);
+    background-color: var(--mid-dark);
     min-width: 50%;
     min-height: 50%;
     /* margin: 20px; */
     /* padding: 20px; */
     border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     display: flex;
     justify-content: space-evenly;
     /* align-items: center; */
@@ -635,13 +653,13 @@ nav {
 }
 
 .register-form a {
-    color: #af863a;
+    color: var(--accent-lighter);
     text-decoration: underline;
     text-align: center;
 }
 
 .register-form a:hover{
-    color: #e8b047;
+    color: var(--accent-color);
 }
 
 .register-form label {
@@ -650,7 +668,8 @@ nav {
 }
 
 .register-form input {
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
+    background-color: var(--low-dark);
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
@@ -658,7 +677,8 @@ nav {
 }
 
 .register-form textarea {
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
+    background-color: var(--low-dark);
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
@@ -671,12 +691,12 @@ nav {
     font-size: 16px;
     border-radius: 5px;
     border: none;
-    background-color: #e8b047;
+    background-color: var(--accent-color);
     color: white;
     font-weight: 700;
 }
 .register-form button:hover {
-    background-color: #f1d092;
+    background-color: var(--accent-lighter);
     cursor: pointer;
 }
 
@@ -685,13 +705,15 @@ nav {
     flex-direction: column;
     gap: 20px;
     flex-grow: 1;
-    justify-content: center;
+    justify-content: center;    
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     align-items: center;
-    border-left: 1px solid rgba(44, 44, 44, 0.5);
+    border-left: 1px solid var(--border-dark);
     /* height: 100%; */
     /* margin-left: 20px; */
     padding: 40px;
-    background-color: #e8b047;
+    background-color: var(--accent-color);
 }
 
 .register-page-content {
@@ -711,13 +733,13 @@ nav {
 }
 .register-page-icon p {
     text-align: center;
-    /* color: #515151; */
+    /* color: var(--heading-text); */
     color: white;
 }
 
 .register-page-icon span{
     font-size: 5rem;
-    /* color: #e8b047; */
+    /* color: var(--accent-color); */
     color: white;
     cursor:default;
 }
@@ -732,19 +754,19 @@ nav {
     height: 90%;
     display: flex;
     /* justify-content: center; */
-    /* background-color: rgba(248, 248, 248, 1); */
+    /* background-color: var(--low-dark); */
     /* border-radius: 5px; */
-    /* border: 1px solid rgba(44, 44, 44, 0.3); */
+    /* border: 1px solid var(--border-mid); */
     /* margin: 20px; */
 }
 
 .profile-page-content h1, h2, h3 {
-    color: #515151;
+    color: var(--heading-text);
 }
 
 .profile-left {
-    background-color: rgba(248, 248, 248, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--low-dark);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     margin: 20px;
     padding: 20px;
@@ -768,7 +790,7 @@ nav {
 }
 
 .bio {
-    border-bottom: 1px solid rgba(44, 44, 44, 0.5);
+    border-bottom: 1px solid var(--border-dark);
     padding-bottom: 10px;
 }
 
@@ -779,9 +801,9 @@ nav {
 }
 
 .users-comments, .users-decks {
-    background-color: rgba(237, 237, 237, 1);
+    background-color: var(--mid-dark);
     box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     margin: 20px;
     flex-grow: 1;
@@ -798,15 +820,15 @@ nav {
 .users-decks h1 {
     position: sticky;
     top: 0;
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     padding: 20px;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    box-shadow: 0 3px 10px var(--border-light);
     z-index: 2;
 }
 
 .all-decks {
     display: flex;
-    color: #515151;
+    color: var(--heading-text);
     flex-direction: row;
     min-height: 80%;
     flex-wrap: wrap;
@@ -816,7 +838,7 @@ nav {
 }
 
 .deck-container {
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     /* padding: 10px; */
     margin: 10px;
     width: 45%;
@@ -824,7 +846,7 @@ nav {
     max-width: 350px;
     max-height: 200px;
     flex-grow: 1;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     display: flex;
     justify-content: flex-start;
@@ -835,7 +857,7 @@ nav {
 }
 
 .deck-container:hover {
-    outline: 3px solid #e8b047;
+    outline: 3px solid var(--accent-color);
     box-shadow: 0 0 20px #ffa200b2;
 }
 
@@ -867,8 +889,8 @@ nav {
     gap: 5px;
     padding: 10px;
     font-size: larger;
-    background-color: rgba(248, 248, 248, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--low-dark);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     margin: 10px;
     word-break: break-all;
@@ -876,24 +898,24 @@ nav {
 
 .single-comment-card p:first-child {
     font-style: italic;
-    color: #7d7d7d;
+    color: var(--heading-text);
 }
 
 .single-comment-card a{ 
-    color:#af863a;
+    color:var(--accent-lighter);
     text-decoration: underline;
 }
 
 .single-comment-card a:hover { 
-    color:#e8b047;
+    color:var(--accent-color);
 }
 
 
 .users-comments h1 {
     padding: 20px;
-    border-bottom: 1px solid rgba(44, 44, 44, 0.3);
-    background-color: rgba(248, 248, 248, 1);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    border-bottom: 1px solid var(--border-mid);
+    background-color: var(--low-dark);
+    box-shadow: 0 3px 10px var(--border-light);
     position: sticky;
     top: 0;
 }
@@ -902,7 +924,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #7d7d7d;
+    color: var(--heading-text);
     height: 75%;
 }
 
@@ -943,24 +965,26 @@ nav {
 }
 
 .home-page-container h1 {
-    color: #515151;
-    background-color: rgba(248, 248, 248, 1);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    color: var(--heading-text);
+    background-color: var(--low-dark);
+    box-shadow: 0 3px 10px var(--border-light);
     padding: 20px;
-    border-bottom: 1px solid rgba(44, 44, 44, 0.3);
+    border-bottom: 1px solid var(--border-mid);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .recent-comments {
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     flex-grow: 1;
     max-width: 70%;
 }
 
 .recent-decks-container {
-    background-color: rgba(237, 237, 237, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -976,7 +1000,7 @@ nav {
 .recent-decks {
     display: flex;
     flex-direction: column;
-    color: #515151;
+    color: var(--heading-text);
     min-height: 80%;
     /* flex-wrap: wrap; */
     padding: 20px;
@@ -984,7 +1008,7 @@ nav {
 }
 
 .recent-deck-container {
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     /* padding: 10px; */
     margin: 10px;
     /* width: 45%; */
@@ -992,7 +1016,7 @@ nav {
     max-width: 520px;
     max-height: 200px;
     flex-grow: 1;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     display: flex;
     justify-content: flex-start;
@@ -1003,8 +1027,8 @@ nav {
 }
 
 .recent-deck-container:hover {
-    outline: 3px solid #e8b047;
-    box-shadow: 0 0 20px #ffa200b2;
+    outline: 3px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-lighter);
 }
 
 .recent-deck-container p {
@@ -1048,7 +1072,7 @@ nav {
 */
 
 .total {
-    color: #7d7d7d;
+    color: var(--heading-text);
 }
 
 .error {
@@ -1074,7 +1098,7 @@ nav {
 }
 
 .decklist-page h1 {
-    color: #515151;
+    color: var(--heading-text);
 }
 
 .deck-info {
@@ -1086,11 +1110,11 @@ nav {
     gap: 20px;
     justify-content: space-between;
     align-items: flex-end;
-    background-color: rgba(237, 237, 237, 1);
+    background-color: var(--mid-dark);
     padding: 20px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-bottom: 1px solid rgb(68, 68, 68);
     /* border-radius: 5px; */
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    box-shadow: 0 3px 10px var(--border-light);
     position: sticky;
     top: 0;
     z-index: 10000;
@@ -1107,8 +1131,8 @@ nav {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid #e8b047;
-    background-color: #e8b047;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
     transition: background-color 0.2s;
     color: white;
 }
@@ -1126,13 +1150,13 @@ nav {
 }
 
 .card-display {
-    background-color: rgba(237, 237, 237, 1);
+    background-color: var(--mid-dark);
     height: max-content;
     padding: 20px;
     position: sticky;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
+    box-shadow: 0 3px 10px var(--border-light);
     top: 100px;
     z-index: 1;
 }
@@ -1146,9 +1170,9 @@ nav {
     gap: 10px;
     padding: 20px;
     min-width: 489px;
-    background-color: rgb(237, 237, 237);
+    background-color: var(--mid-dark);
     border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
     max-width: 1100px;
     align-items: flex-start;
@@ -1192,10 +1216,10 @@ nav {
 .decklist-card {
     display: flex;
     flex-direction: row;
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     /* padding: 10px; */
     border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
@@ -1220,13 +1244,14 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s, color 0.2s;
-    border-left: 1px solid rgba(44, 44, 44, 0.3);
+    /* transition: background-color 0.2s, color 0.2s; */
+    border-left: 1px solid var(--border-mid);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 5px;
     /* flex-grow: 1; */
     /* font-size: 12px; */
+    color: white;
 }
 
 #delete-btn:hover {
@@ -1238,24 +1263,29 @@ nav {
 #add-card-searchbar {
     position: relative;
     padding: 10px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--high-dark);
     flex-grow: 1;
     /* max-width: 400px; */
     /* align-self: flex-end; */
+    color: white;
+}
+
+#add-card-searchbar::placeholder {
+    color: rgb(200, 200, 200);
 }
 
 .add-card-dropdown {
     position: absolute;
     top: 40px;
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    background-color: var(--mid-dark);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.3);
+    box-shadow: 0 3px 10px var(--border-mid);
     z-index: 10000;
     width: 100%;
     display: none;
@@ -1268,7 +1298,7 @@ nav {
 
 .add-card-dropdown button {
     background-color: transparent;
-    color: black;
+    color: rgb(201, 201, 201);
     border: none;
     padding: 10px;
     width: 100%;
@@ -1276,7 +1306,7 @@ nav {
 }
 
 .add-card-dropdown button:hover {
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
     cursor: pointer;
 }
 
@@ -1296,7 +1326,7 @@ nav {
 
 .editDeckModalContent {
     border-radius: 5px;
-    background-color: rgba(248, 248, 248, 1);
+    background-color: var(--low-dark);
 }
 
 .editDeckModalContent form {
@@ -1315,13 +1345,13 @@ nav {
 .editDeckModalContent form input {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid var(--border-mid);
     border-radius: 5px;
 }
 
 .editDeckModalContent form button {
     width: 100%;
-    background-color: #e8b047;
+    background-color: var(--accent-color);
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -1329,12 +1359,12 @@ nav {
 }
 
 .editDeckModalContent form button:hover {
-    background-color: #f1d092;
+    background-color: var(--accent-lighter);
     cursor: pointer;
 }
 
 .editDeckButton {
-    background-color: #e8b047;
+    background-color: var(--accent-color);
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -1342,7 +1372,7 @@ nav {
 }
 
 .editDeckButton:hover {
-    background-color: #f1d092;
+    background-color: var(--accent-lighter);
     cursor: pointer;
 }
 
@@ -1361,9 +1391,10 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s, color 0.2s;
-    border-left: 1px solid rgba(44, 44, 44, 0.3);
+    /* transition: background-color 0.2s, color 0.2s; */
+    border-left: 1px solid var(--border-mid);
     padding: 5px;
+    color: white;
 }
 
 #add-btn:hover {
