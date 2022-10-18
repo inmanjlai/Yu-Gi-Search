@@ -192,7 +192,7 @@ def home():
 
 @app.route("/cards/search/page/<int:page_number>", methods=["POST", "GET"])
 def search_paginated(page_number):
-    card_name = request.form.get("card-name")
+    card_name = request.form.get("card-name").lower()
 
     if card_name.lower().startswith("spell:"):
         card_name_updated = card_name.replace("spell:", "")
