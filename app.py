@@ -361,6 +361,17 @@ def get_deck(deck_id):
 
     return render_template("deck.html", deck=deck, decklist=decklist, main_deck_length=main_deck_length, extra_deck_length=extra_deck_length)
 
+@app.route("/decks/delete/<int:deck_id>", methods=["POST"])
+def delete_deck(deck_id):
+    deck = Deck.query.get(deck_id)
+    print(deck.to_dict())
+    if deck.user_id == current_user.id:
+        db.session.delete(deck)
+        db.session.commit()
+        return redirect("/")
+    else:
+        return {"ERROR": "UNAUTHORIZED"}, 401
+
 @app.route("/decklist/add-quantity/<int:deck_id>/<int:card_id>", methods=["POST"])
 def add_card_quantity(deck_id, card_id):
     decklist = DeckList.query.filter(DeckList.card_id==card_id, DeckList.deck_id==deck_id).first()
@@ -391,9 +402,7 @@ def card_not_found(deck_id):
 @app.route("/decklist/<int:deck_id>/<int:card_id>", methods=["POST"])
 def add_card_to_decklist(deck_id, card_id):
 
-    print("HLELO")
     deck = Deck.query.get(deck_id)
-    print(current_user.id, deck.user_id)
 
     if current_user.id == deck.user_id:
         card = Card.query.get(card_id)

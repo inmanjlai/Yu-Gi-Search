@@ -13,12 +13,12 @@ class CardSets(db.Model):
 class DeckList(db.Model):
     __tablename__ = "decklists"
 
-    card_id = db.Column(db.Integer, db.ForeignKey("cards.id"), primary_key=True)
+    card_id = db.Column(db.Integer, primary_key=True)
     deck_id = db.Column(db.Integer, db.ForeignKey("decks.id"), primary_key=True)
     quantity = db.Column(db.Integer, default=1)
 
-    card = db.relationship("Card", backref="decks")
-    deck = db.relationship("Deck", backref="cards")
+    # card = db.relationship("Card", backref="decks")
+    deck = db.relationship("Deck", back_populates="cards")
 
     def to_dict(self):
         return {
@@ -84,6 +84,7 @@ class Deck(db.Model):
     cover_img = db.Column(db.String(4000))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
+    cards = db.relationship("DeckList", cascade="all, delete, delete-orphan", back_populates="deck")
     user = db.relationship("User", backref="decks")
 
     def get_decklist(self):
@@ -95,18 +96,17 @@ class Deck(db.Model):
             card_object["quantity"] = card.quantity
             if "XYZ" not in card_object["type"] and "Link" not in card_object["type"] and "Fusion" not in card_object["type"] and "Synchro" not in card_object["type"]:
                 main_deck.append(card_object)
-                print(card_object["type"], "\n\n")
             else:
                 extra_deck.append(card_object)
 
         deck = {"main_deck": [card for card in main_deck], "extra_deck": [card for card in extra_deck]}
-        print(deck)
         return deck
 
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-            'user_id': self.user_id
+            'user_id': self.user_id,
+            'cards': self.cards
         }
 

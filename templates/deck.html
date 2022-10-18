@@ -17,9 +17,13 @@
     <div class="editDeckModal">
         <div class="editDeckModalContent">
             <form action="/decks/{{deck.id}}/edit" method="POST">
-                <label>Deck Name:</label>
+                <label>Edit Name:</label>
                 <input type="text" name="deck-name" placeholder="Deck Name" required>
                 <button>Confirm Changes</button>
+            </form>
+            <hr>
+            <form action="/decks/delete/{{deck.id}}" method="POST">
+                <button class="delete-deck">Delete Deck</button>
             </form>
         </div>
     </div>
@@ -31,7 +35,7 @@
             <div>
                 <h1>{{deck.name}}</h1>
                 {% if current_user.id == deck.user_id %}
-                    <button onclick="openEditDeckModal()" class="editDeckButton">Change Name</button>
+                    <button onclick="openEditDeckModal()" class="editDeckButton"><span class="material-symbols-outlined">settings</span></button>
                 {% endif %}
             </div>
             
@@ -160,9 +164,6 @@
             </div>
         </div>
         <p class="total">Main Deck: {{main_deck_length}} - Extra Deck: {{extra_deck_length}}</p>
-        <div class="hover-card-display">
-            <img src="" alt="">
-        </div>
     </div>
 </body>
 </html>

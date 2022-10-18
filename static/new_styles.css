@@ -159,6 +159,7 @@ nav {
 .deck-modal-content button {
     padding: 10px;
     background-color: #e8b047;
+    color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -194,13 +195,13 @@ nav {
     cursor: pointer;
 }
 
-.menu-btn span {
+.menu-btn-container span {
     font-size: 36px;
+    cursor: pointer;
 }
 
 .menu-btn-dropdown {
     position: absolute;
-    background-color: rgba(237, 237, 237, 1);
     border-radius: 5px;
     border: 1px solid rgba(44, 44, 44, 0.3);
     box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
@@ -218,6 +219,7 @@ nav {
     background-color: rgba(44, 44, 44, 0.7);
     z-index: 99999999;
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     font-size: 24px;
     visibility: hidden;
 }
@@ -433,7 +435,7 @@ nav {
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-
+    /* max-width: 95%; */
     height: max-content;
     margin-right: 20px;
     border-radius: 5px;
@@ -1067,6 +1069,8 @@ nav {
     color: #7d7d7d;
 }
 
+
+
 .error {
     background-color: rgb(209, 65, 65);
     padding: 10px;
@@ -1115,6 +1119,7 @@ nav {
 .deck-info > div {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
@@ -1236,7 +1241,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s, color 0.2s;
+    /* transition: background-color 0.2s, color 0.2s; */
     border-left: 1px solid rgba(44, 44, 44, 0.3);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -1320,6 +1325,7 @@ nav {
     justify-content: center;
     flex-direction: column;
     /* align-items: center; */
+    min-width: 400px;
     padding: 20px;
     gap: 10px;
 }
@@ -1342,6 +1348,7 @@ nav {
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
+    color: white;
 }
 
 .editDeckModalContent form button:hover {
@@ -1350,7 +1357,9 @@ nav {
 }
 
 .editDeckButton {
-    background-color: #e8b047;
+    /* background-color: #e8b047; */
+    background-color: transparent;
+    /* color: white; */
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -1358,7 +1367,7 @@ nav {
 }
 
 .editDeckButton:hover {
-    background-color: #f1d092;
+    /* background-color: #f1d092; */
     cursor: pointer;
 }
 
@@ -1377,7 +1386,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s, color 0.2s;
+    /* transition: background-color 0.2s, color 0.2s; */
     border-left: 1px solid rgba(44, 44, 44, 0.3);
     padding: 5px;
 }
@@ -1386,6 +1395,15 @@ nav {
     background-color: rgb(85, 204, 228);
     outline: 1px solid rgb(85, 204, 228);
     color: white;
+}
+
+.editDeckModal .delete-deck {
+    background-color: rgb(209, 65, 65);
+    color: white;
+}
+
+.editDeckModal .delete-deck:hover {
+    background-color: rgb(230, 106, 106);
 }
 
 @media screen and (min-width: 1700px) {
@@ -1413,16 +1431,23 @@ nav {
     .deck-info {
         font-size: xx-small;
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 
     .deck-info > div {
         display: flex;
         flex-direction: row;
-        /* justify-content: center; */
+        justify-content: space-between;
         align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .type-container {
+        width: 100%;
+        max-width: 100%;
     }
 
     .editDeckButton {
