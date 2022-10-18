@@ -203,6 +203,11 @@ def search_paginated(page_number):
     elif card_name.lower().startswith("trap:"):
         card_name_updated = card_name.replace("trap:", "")
         paginated_cards = Card.query.filter(Card.type.ilike("%" + "trap" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
+    elif card_name.lower().startswith("desc:"):
+        print(card_name)
+        card_name_updated = card_name.replace("desc:", "")
+        print(card_name_updated)
+        paginated_cards = Card.query.filter(Card.description.ilike("%" + card_name_updated + "%")).paginate(page=page_number, per_page=50)
     else:
         paginated_cards = get_cards_paginated(card_name=card_name, page_number=page_number)
             
