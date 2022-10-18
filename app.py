@@ -194,19 +194,19 @@ def home():
 def search_paginated(page_number):
     card_name = request.form.get("card-name").lower()
 
-    if card_name.lower().startswith("spell:"):
+    print("CARD NAME:",card_name, "PAGE NUMBER:", page_number)
+
+    if card_name.startswith("spell:"):
         card_name_updated = card_name.replace("spell:", "")
         paginated_cards = Card.query.filter(Card.type.ilike("%" + "spell" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
-    elif card_name.lower().startswith("monster:"):
+    elif card_name.startswith("monster:"):
         card_name_updated = card_name.replace("monster:", "")
         paginated_cards = Card.query.filter(Card.type.ilike("%" + "monster" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
-    elif card_name.lower().startswith("trap:"):
+    elif card_name.startswith("trap:"):
         card_name_updated = card_name.replace("trap:", "")
         paginated_cards = Card.query.filter(Card.type.ilike("%" + "trap" + "%"), Card.name.ilike(card_name_updated + "%")).paginate(page=page_number, per_page=50)
-    elif card_name.lower().startswith("desc:"):
-        print(card_name)
+    elif card_name.startswith("desc:"):
         card_name_updated = card_name.replace("desc:", "")
-        print(card_name_updated)
         paginated_cards = Card.query.filter(Card.description.ilike("%" + card_name_updated + "%")).paginate(page=page_number, per_page=50)
     else:
         paginated_cards = get_cards_paginated(card_name=card_name, page_number=page_number)
@@ -223,6 +223,8 @@ def search_paginated(page_number):
     else:
         if len(paginated_cards.items) == 1:
                 return redirect(f"/card/{paginated_cards.items[0].id}")
+
+        print("CARD NAME AFTER:",card_name, "PAGE NUMBER:", page_number)
         return render_template(
             "cards.html", 
             cards=paginated_cards.items, 

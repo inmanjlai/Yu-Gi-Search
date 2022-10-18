@@ -16,7 +16,7 @@
         <div class="search-results">
             <div class="page-numbers">
                 <form action="/cards/search/page/{{page_number - 1}}" method="POST">
-                    <input type="hidden" name="card-name" value={{card_name}}>
+                    <input type="hidden" name="card-name" value="{{card_name}}">
                         {% if prev %}
                             <button><span class="material-symbols-outlined">
                                 arrow_left
@@ -32,7 +32,7 @@
                         <!-- <p>Showing {{ from_to }}</p> -->
                     </div>
                 <form action="/cards/search/page/{{page_number + 1}}" method="POST">
-                    <input type="hidden" name="card-name" value={{card_name}}>
+                    <input type="hidden" name="card-name" value="{{card_name}}">
                     {% if next %}
                         <button><span class="material-symbols-outlined">
                             arrow_right
