@@ -763,6 +763,11 @@ nav {
     /* margin: 20px; */
 }
 
+.profile-page-content h1 {
+    font-size: 36px;
+    word-wrap: break-word;
+}
+
 .profile-page-content h1, h2, h3 {
     color: #515151;
 }
