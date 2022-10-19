@@ -1,7 +1,5 @@
 let cardDisplay = document.querySelector(".card-display")
 
-console.log("HELLO WORLD")
-
 const displayCard = (img_url) => {
     cardDisplay.children[0].src = img_url
 }

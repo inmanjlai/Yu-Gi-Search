@@ -29,8 +29,6 @@ const modal = document.querySelector(".deck-modal")
 let deckbtn = document.querySelector(".deckbtn")
 let mobileDeckBtn = document.querySelector(".menudeckbtn")
 
-    console.log(e.target)
-
     if(e.target === deckbtn || e.target === mobileDeckBtn){
         console.log("CLicked")
         modal.style.opacity = 1
