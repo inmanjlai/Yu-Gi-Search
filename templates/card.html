@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/new_styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Yu-Gi-Search | {{ card.name }}</title>
+    <script src="/static/scripts/toggleSets.js" defer></script>
 </head>
 <body>
 
@@ -18,13 +20,34 @@
                 <img src={{card.img_url}} alt={{card.name}}>
             </div>
     
+            
             <div class="card-sets">
-                <h2>Sets</h2>
                 <div class="card-set-names">
-                    {% for set in sets %}
-                        <p>{{set.code}} - {{set.name}} - {{set.rarity}}</p>
-                    {% endfor %}
+                    <table class="sets-table">
+                        <tr>
+                            <th>Code</th>
+                            <th class="set-name">Name</th>
+                            <th>Rarity</th>
+                            <th>Price</th>
+                        </tr>
+                        
+                        {% for cardset in sets %}
+                        <tr>
+                            <td>{{cardset.set.code}}</td>
+                            <td>{{cardset.set.name}}</td>
+                            <td>{{cardset.set_rarity}}</td>
+                            <td>
+                                {% if cardset.set_price == 0.0 %}
+                                    N/A
+                                {% else %}
+                                    ${{cardset.set_price}}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                 </div>
+                <div class="sets-heading" onclick="toggleSets()"><h2>Sets </h2><span class="material-symbols-outlined">expand_more</span></div>
             </div>
         </div>
         <div class="desc-and-comments">

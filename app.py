@@ -49,18 +49,19 @@ def request_card(card_name):
     return card
 def create_sets(card):
     sets = card["card_sets"]
-    card_name = card["name"]
-    card_to_associate = Card.query.filter(Card.name == card_name).first()
+    card_id = str(card["id"])
+    card_to_associate = Card.query.filter(Card.card_id == card_id).first()
+
+    print(card_to_associate, "CARD TO ASSOCIATE")
+    print(sets, "CARDS SETS")
 
     for set in sets:
-
         set_in_db = Set.query.filter(Set.name == set["set_name"]).first()
 
         if not set_in_db:
             new_set = Set(
                 name=set["set_name"],
-                code=set["set_code"],
-                rarity=set["set_rarity"] 
+                code=set["set_code"]
             )
             db.session.add(new_set)
             db.session.commit()
@@ -71,13 +72,16 @@ def create_sets(card):
         association_already_exists = CardSets.query.filter(CardSets.card_id == card_to_associate.id, CardSets.set_id == set_in_db.id).first()
 
         if association_already_exists:
-            return "Association already exists between card and set"
-        new_association = CardSets(
-            card_id=card_to_associate.id,
-            set_id=set_in_db.id
-        )
-        db.session.add(new_association)
-        db.session.commit()
+            print(f"\n\nAssociation between {card_to_associate.name} and {association_already_exists.set.name} already exists\n\n")
+        else:
+            new_association = CardSets(
+                card_id=card_to_associate.id,
+                set_id=set_in_db.id,
+                set_price=set["set_price"],
+                set_rarity=set["set_rarity"]
+            )
+            db.session.add(new_association)
+            db.session.commit()
 def create_card_in_db(card):
 
     attack = None
@@ -103,6 +107,12 @@ def create_card_in_db(card):
     if "XYZ" in card['type']:
         rank = card["level"]
     
+    lowest_price = card["card_prices"][0]['tcgplayer_price']
+
+    if lowest_price == '0.0':
+        print("LOWEST PRICE IS 0")
+        lowest_price = None
+
     add_to_db = Card(
         name=card["name"],
         description=card["desc"],
@@ -115,7 +125,8 @@ def create_card_in_db(card):
         level=level,
         attribute=attribute,
         link_rating=link_rating,
-        rank=rank
+        rank=rank,
+        lowest_price=lowest_price
     )
 
     db.session.add(add_to_db)
@@ -155,13 +166,9 @@ def get_cards_like_name(card_name):
 def get_card_sets(card):
     card_id = card["id"]
     cards_and_sets = CardSets.query.filter(CardSets.card_id == card_id).all()
-    set_ids = [set.set_id for set in cards_and_sets]
-    sets = []
-    for id in set_ids:
-        set = Set.query.get(id)
-        sets.append(set)
+    
+    return [card_set.to_dict() for card_set in cards_and_sets]
 
-    return [set.to_dict() for set in sets]
 def get_cards_paginated(card_name, page_number):
     cards = Card.query.filter(Card.name.ilike('%' + card_name + '%')).paginate(page=page_number, per_page=50)
     return cards
@@ -193,8 +200,6 @@ def home():
 @app.route("/cards/search/page/<int:page_number>", methods=["POST", "GET"])
 def search_paginated(page_number):
     card_name = request.form.get("card-name").lower()
-
-    print("CARD NAME:",card_name, "PAGE NUMBER:", page_number)
 
     if card_name.startswith("spell:"):
         card_name_updated = card_name.replace("spell:", "")
@@ -466,3 +471,10 @@ def edit_deck(deck_id):
     db.session.commit()
 
     return redirect(f"/decks/{deck.id}")
+
+# @app.route("/test/addcard")
+# def test_route():
+#     buster_blader = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?name=buster%20blader").json()
+
+#     create_card_in_db(buster_blader['data'][0])
+#     return "wow"

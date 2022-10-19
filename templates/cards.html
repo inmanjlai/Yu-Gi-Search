@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/new_styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Yu-Gi-Search | {{card_name}}</title>
+    <script src="/static/scripts/sortByScript.js" defer></script>
 </head>
 <body>
 
@@ -29,6 +30,19 @@
                     </form>
                     <div class="number-of-results">
                         <h1>{{total}} results for <span class="search-query">{{card_name}}</span></h1>
+                        <!-- <div class="sorted-by-container">
+                            <p>Sorted by</p>
+                            <form action="/cards/search/page/{{page_number}}" method="POST" class="sort-by-form">
+                                <input type="hidden" name="card-name" value="{{card_name}}">
+                                <input type="hidden" name="sort-by" value="">
+                                <select class="sort-by-select">
+                                    <option value="name,asc">Name Ascending</option>
+                                    <option value="name,desc">Name Descending</option>
+                                    <option value="lowest_price,asc">Price Ascending</option>
+                                    <option value="lowest_price,desc">Price Descending</option>
+                                </select>
+                            </form>
+                        </div> -->
                         <!-- <p>Showing {{ from_to }}</p> -->
                     </div>
                 <form action="/cards/search/page/{{page_number + 1}}" method="POST">

@@ -6,9 +6,23 @@ class CardSets(db.Model):
 
     card_id = db.Column(db.Integer, db.ForeignKey("cards.id"), primary_key=True)
     set_id = db.Column(db.Integer, db.ForeignKey("sets.id"), primary_key=True)
+    set_price = db.Column(db.Float())
+    set_rarity = db.Column(db.String(500))
 
     card = db.relationship("Card", backref="sets", cascade="all,delete")
     set = db.relationship("Set", backref="cards", cascade="all,delete")
+
+    def to_dict(self):
+
+        print(self.set.to_dict(), "HERE")
+
+        return {
+            "card_id": self.card_id,
+            "set_id": self.set_id,
+            "set_price": self.set_price,
+            "set_rarity": self.set_rarity,
+            "set": self.set.to_dict()
+        }
 
 class DeckList(db.Model):
     __tablename__ = "decklists"
@@ -42,6 +56,7 @@ class Card(db.Model):
     attribute = db.Column(db.String(255))
     link_rating = db.Column(db.Integer)
     rank = db.Column(db.Integer)
+    lowest_price = db.Column(db.Float())
 
     def to_dict(self):
         return {
@@ -57,7 +72,8 @@ class Card(db.Model):
             'race': self.race,
             'attribute': self.attribute,
             'link_rating': self.link_rating,
-            'rank': self.rank
+            'rank': self.rank,
+            'lowest_price': self.lowest_price
         }
 
 class Set(db.Model):
@@ -66,14 +82,12 @@ class Set(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     code = db.Column(db.String(255), nullable=False)
-    rarity = db.Column(db.String(255), nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-            'code': self.code,
-            'rarity': self.rarity
+            'code': self.code
         }
 
 class Deck(db.Model):
