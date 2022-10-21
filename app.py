@@ -338,7 +338,7 @@ def post_comment():
 #DECK ROUTES ->
 @app.route("/users/<int:user_id>/decks")
 def users_decks(user_id):
-    decks = Deck.query.filter(Deck.user_id == user_id)
+    decks = Deck.query.filter(Deck.user_id == user_id).all()
     return render_template("users-decks.html", decks=decks)
 
 @app.route("/decks", methods=["POST"])

@@ -35,6 +35,7 @@
             <div>
                 <h1>{{deck.name}}</h1>
                 {% if current_user.id == deck.user_id %}
+                    <p>Made by {{deck.user.username}}</p>
                     <button onclick="openEditDeckModal()" class="editDeckButton"><span class="material-symbols-outlined">settings</span></button>
                 {% endif %}
             </div>
