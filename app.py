@@ -313,7 +313,7 @@ def login():
 def profile_page(user_id):
     user = User.query.get(user_id)
     comments = get_users_comments(user_id)
-    users_decks = user.decks
+    users_decks = Deck.query.filter(Deck.user_id == user_id).all()
 
     return render_template("profile.html", user=user, comments=comments, decks=users_decks)
 
