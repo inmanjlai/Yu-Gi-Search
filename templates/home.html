@@ -5,36 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/new_styles.css">
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    
     <title>Yu-Gi-Search | Home</title>
 </head>
 <body>
     {% include "/navbar.html" %}
 
     <div class="home-page-container">
+        
+        <div class="recent-decks-container">
+            <h1>Recently Created Decks</h1>
+            <div class="recent-decks">
+                {% for deck in recent_decks %}
+                    <a class="recent-deck-container" href="/decks/{{deck.id}}">
+                        <img src="{{deck.cover_img}}" alt="">
+                        <div>
+                            <span class="material-symbols-outlined">
+                                folder
+                            </span>   
+                            <p>{{deck.name}}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
         <div class="recent-comments">
             <h1>Recently Posted Comments</h1>
             <div class="recent-comments-list">
                 {% for comment in recent_comments %}
                     <div class="single-comment-card">
-                        <p>Commented on <a href="/card/{{comment.card.id}}">{{comment.card.name}}</a></p>
                         <p>{{comment.content}}</p>
-                        <p class="posted-by">Posted by <a href="/users/{{comment.user_id}}" class="comment-author">{{comment.user.username}}</a></p>
+                        <p class="posted-by">
+                            <a href="/users/{{comment.user_id}}" class="comment-author">{{comment.user.username}}</a> 
+                            commented on 
+                            <a href="/card/{{comment.card.id}}" class="card-name">{{comment.card.name}}</a>
+                        </p>
                     </div>    
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="recent-decks-container">
-            <h1>Recently Created Decks</h1>
-            <div class="recent-decks">
-                {% for deck in recent_decks %}
-                <a class="recent-deck-container" href="/decks/{{deck.id}}">
-                    <p>{{deck.name}}</p>
-                    <img src={{deck.cover_img}} alt="">
-                </a>
                 {% endfor %}
             </div>
         </div>
     </div>
+
+    {% include "/footer.html" %}
+
 </body>
 </html>

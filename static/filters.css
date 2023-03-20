@@ -1,0 +1,29 @@
+.filters {
+    display: flex;
+    align-items: center;
+    height: 200px;
+    padding: 25px;
+    gap: 40px;
+}
+
+.filters .left, .filters .right {
+    height: 100%;
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 20px;
+}
+
+.left > div, .right > div {
+    height: 100%;
+    width: 100%;
+}
+
+.filters label {
+    /* background-color: red; */
+}
+
+.filters input{
+    max-width: 40px;
+}

@@ -121,6 +121,7 @@ class Deck(db.Model):
             'id': self.id,
             'name': self.name,
             'user_id': self.user_id,
-            'cards': self.cards
+            'cards': self.cards,
+            'cover_img': self.cover_img
         }
 

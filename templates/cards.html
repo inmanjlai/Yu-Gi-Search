@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/new_styles.css">
+    <link rel="stylesheet" href="/static/search.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Yu-Gi-Search | {{card_name}}</title>
     <script src="/static/scripts/sortByScript.js" defer></script>
@@ -16,47 +17,35 @@
     <div class="content">
         <div class="search-results">
             <div class="page-numbers">
-                <form action="/cards/search/page/{{page_number - 1}}" method="POST">
-                    <input type="hidden" name="card-name" value="{{card_name}}">
-                        {% if prev %}
-                            <button><span class="material-symbols-outlined">
-                                arrow_left
+                <div class="number-of-results">
+                    <h1>{{total}} results for <span class="search-query">{{card_name}}</span> _</h1>
+                </div>
+                <div class="page-buttons">
+                    <form action="/cards/search/page/{{page_number - 1}}" method="POST">
+                        <input type="hidden" name="card-name" value="{{card_name}}">
+                            {% if prev %}
+                                <button id="backbtn"><span class="material-symbols-outlined">
+                                    arrow_left
+                                    </span>Back</button>
+                            {% else %}
+                                <button disabled id="backbtn"><span class="material-symbols-outlined">
+                                    arrow_left
+                                    </span>Back</button>
+                            {% endif %}
+                        </form>
+                    <form action="/cards/search/page/{{page_number + 1}}" method="POST">
+                        <input type="hidden" name="card-name" value="{{card_name}}">
+                        {% if next %}
+                            <button>Next<span class="material-symbols-outlined">
+                                arrow_right
                                 </span></button>
                         {% else %}
-                            <button disabled><span class="material-symbols-outlined">
-                                arrow_left
+                            <button disabled>Next<span class="material-symbols-outlined">
+                                arrow_right
                                 </span></button>
                         {% endif %}
-                    </form>
-                    <div class="number-of-results">
-                        <h1>{{total}} results for <span class="search-query">{{card_name}}</span></h1>
-                        <!-- <div class="sorted-by-container">
-                            <p>Sorted by</p>
-                            <form action="/cards/search/page/{{page_number}}" method="POST" class="sort-by-form">
-                                <input type="hidden" name="card-name" value="{{card_name}}">
-                                <input type="hidden" name="sort-by" value="">
-                                <select class="sort-by-select">
-                                    <option value="name,asc">Name Ascending</option>
-                                    <option value="name,desc">Name Descending</option>
-                                    <option value="lowest_price,asc">Price Ascending</option>
-                                    <option value="lowest_price,desc">Price Descending</option>
-                                </select>
-                            </form>
-                        </div> -->
-                        <!-- <p>Showing {{ from_to }}</p> -->
-                    </div>
-                <form action="/cards/search/page/{{page_number + 1}}" method="POST">
-                    <input type="hidden" name="card-name" value="{{card_name}}">
-                    {% if next %}
-                        <button><span class="material-symbols-outlined">
-                            arrow_right
-                            </span></button>
-                    {% else %}
-                        <button disabled><span class="material-symbols-outlined">
-                            arrow_right
-                            </span></button>
-                    {% endif %}
-                    </form>
+                        </form>
+                </div>
             </div>
             <div class="cards-list-container">
                 {% for card in cards %}
@@ -64,7 +53,7 @@
                         <div class="single-card-img">
                         <a href="/card/{{card.id}}"><img src={{card.img_url}} alt={{card.name}}></a> 
                         </div>
-                        <p>{{card.name}}</p>
+                        <p class="card-name-search">{{card.name}}</p>
                     </div>
                 {% endfor %}
             </div>
@@ -84,5 +73,7 @@
             </p>
         </div> -->
     </div>
+
+    {% include "./footer.html" %}
 </body>
 </html>

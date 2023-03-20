@@ -39,24 +39,24 @@
                     <button onclick="openEditDeckModal()" class="editDeckButton"><span class="material-symbols-outlined">settings</span></button>
                 {% endif %}
             </div>
-            
             {% if current_user.id == deck.user_id %}
-                <div class="type-container">
-                    {% if error %}
-                    <p class="error">{{error}}</p>
-                    {% endif %}
-                    <input type="text" name="deckcard-name" autocomplete="off" id="add-card-searchbar" placeholder="Search to add a card...">
-                    <!-- <button class="addbtn">Add to Deck</button> -->
-                    <div class="add-card-dropdown">
-                        <div class="add-card-content">
-
-                        </div>
+            <div class="type-container">
+                {% if error %}
+                <p class="error">{{error}}</p>
+                {% endif %}
+                <input type="text" name="deckcard-name" autocomplete="off" id="add-card-searchbar" placeholder="Search to add a card...">
+                <!-- <button class="addbtn">Add to Deck</button> -->
+                <div class="add-card-dropdown">
+                    <div class="add-card-content">
+                        
                     </div>
                 </div>
+            </div>
             {% endif %}
         </div>
         
         
+        <p class="total">Main Deck: {{main_deck_length}} - Extra Deck: {{extra_deck_length}}</p>
         <div class="decklist-area">
             <div class="decklist-container">
                 <div class="card-types">
@@ -164,7 +164,7 @@
                 {% endif %}
             </div>
         </div>
-        <p class="total">Main Deck: {{main_deck_length}} - Extra Deck: {{extra_deck_length}}</p>
+        
     </div>
 </body>
 </html>

@@ -5,23 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/new_styles.css">
+    <link rel="stylesheet" href="/static/nav.css">
+    <link rel="stylesheet" href="/static/filters.css">
     <script src="/static/scripts/exampleScript.js" defer></script>
     <script src="/static/scripts/menu.js" defer></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <title>Yu-Gi-Search</title>
 </head>
 <body>
     {% block navbar %}
         <nav>
             <h1 class="logo"><a href="/">Yu-Gi-Search</a></h1>
+
             <div class="search-bar">
                 <form action="/cards/search/page/1", method="POST" id="nav-search-form" autocomplete="off">
-                    <input type="text" placeholder="Search for a card..." name="card-name" autocomplete="off">
+                    <input type="text" placeholder="Search for a card _" name="card-name" autocomplete="off">
                     <div id="nav-search-dropdown"></div>
                 </form>
             </div>
+
             <div class="links">
+                <!-- <span class="material-symbols-outlined">dark_mode</span> -->
                 {% if not current_user.id %}
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>
@@ -31,6 +41,7 @@
                     <a href="/logout">Logout</a>
                 {% endif %}
             </div>
+            
             <div class="menu-btn-container">
                 {% if current_user.id %}
                     <div><span class="material-symbols-outlined menudeckbtn">library_add</span></div>
@@ -49,10 +60,74 @@
                 </div>
             </div>
 
+            
             <div class="deck-modal">
                 {% include "/deck-modal.html" %}
             </div>
         </nav>
+
+        <!-- <div class="filters">
+            <div class="left">
+                <div class="category">
+                    <label>Category</label>
+                    <select>
+                        <option>All</option>
+                        <option>Monster</option>
+                        <option>Spell</option>
+                        <option>Trap</option>
+                    </select>
+                    <select>
+                        <option>All</option>
+                    </select>
+                </div>
+                <div class="attribute">
+                    <label>Attribute</label>
+                    <select>
+                        <option>All</option>
+                        <option>Earth</option>
+                        <option>Water</option>
+                        <option>Wind</option>
+                        <option>Fire</option>
+                        <option>Dark</option>
+                        <option>Light</option>
+                        <option>Divine</option>
+                    </select>
+                </div>
+                <div class="Type">
+                    <label>Type</label>
+                    <select>
+                        <option>All</option>
+                    </select>
+                </div>
+                <div class="lv-rank">
+                    <label>Lv/Rank</label>
+                    <input type="text">
+                    <label for="">Scale</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="limit">
+                    <label>Legality</label>
+                    <select>
+                        <option>Unlimited</option>
+                        <option>Semi-limited</option>
+                        <option>Limited</option>
+                        <option>Forbidden</option>
+                    </select>
+                </div>
+                <div class="attack">
+                    <label>ATK</label>
+                    <input type="text">
+                </div>
+                <div class="defense">
+                    <label>DEF</label>
+                    <input type="text">
+                </div>
+            </div>
+        </div> -->
+
     {% endblock %}
 </body>
 </html>
