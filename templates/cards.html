@@ -18,7 +18,7 @@
         <div class="search-results">
             <div class="page-numbers">
                 <div class="number-of-results">
-                    <h1>{{total}} results for <span class="search-query">{{card_name}}</span> _</h1>
+                    <h1>{{total}} results for <span class="search-query">{{card_name}}</span></h1>
                 </div>
                 <div class="page-buttons">
                     <form action="/cards/search/page/{{page_number - 1}}" method="POST">
@@ -53,7 +53,10 @@
                         <div class="single-card-img">
                         <a href="/card/{{card.id}}"><img src={{card.img_url}} alt={{card.name}}></a> 
                         </div>
-                        <p class="card-name-search">{{card.name}}</p>
+                        <div class="card-name-search">
+                            <span class="material-symbols-outlined">subdirectory_arrow_right</span>
+                            <p>{{card.name}}</p>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
