@@ -50,7 +50,7 @@
 .sets-heading {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: center;
     cursor: pointer;
     margin-top: 20px;
     width: 100%;
