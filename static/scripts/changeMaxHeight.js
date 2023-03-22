@@ -4,25 +4,25 @@ const cardTypes = document.querySelectorAll('.card-types');
 function adjustMaxHeight() {
 
     let aboveMidThreshold = (currentValue) => currentValue >= 10
-    let aboveHighThreshold = (currentValue) => currentValue >= 15
     let numberOfTypes = []
-    let totalCardsInDeck = 
 
     cardTypes.forEach((ele, idx) => {
         if (idx !== 3) numberOfTypes.push(ele.children.length)
     })
 
-    
-    
-    if (numberOfTypes.some(aboveHighThreshold)) {
-        decklistContainer.style.maxHeight = "1500px"
-    } else if (numberOfTypes.some(aboveMidThreshold)) {
-        if (window.innerWidth <= 1920) {
-            decklistContainer.style.maxHeight = "1200px"
-        } else {
-            decklistContainer.style.maxHeight = "1500px"
-        }
-    } else decklistContainer.style.maxHeight = "900px"
+    let count = 0
+    numberOfTypes.forEach((ele) => {
+        if (ele > 6) count+=1 
+    })
+
+    if (count > 2) {
+        if (numberOfTypes.some(aboveMidThreshold)) decklistContainer.style.maxHeight = "1500px"
+        else decklistContainer.style.maxHeight = "900px"
+    } else if (count == 1) {
+        decklistContainer.style.maxHeight = "900px"
+    } else {
+        decklistContainer.style.maxHeight = "1200px"
+    }
 
 }
 
