@@ -12,16 +12,12 @@ function adjustMaxHeight() {
 
     let count = 0
     numberOfTypes.forEach((ele) => {
-        if (ele > 6) count+=1 
+        if (ele > 6) count+=1
     })
 
     if (count > 2) {
-        if (numberOfTypes.some(aboveMidThreshold)) decklistContainer.style.maxHeight = "1500px"
+        if (numberOfTypes.some(aboveMidThreshold) && window.innerWidth > 600) decklistContainer.style.maxHeight = "1500px"
         else decklistContainer.style.maxHeight = "900px"
-    } else if (count == 1) {
-        decklistContainer.style.maxHeight = "900px"
-    } else {
-        decklistContainer.style.maxHeight = "1200px"
     }
 
 }
