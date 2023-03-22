@@ -166,6 +166,7 @@ body {
 .type-h3 {
     max-width: 40%;
     font-size: 24px;
+    color: #4d4d4d;
 }
 
 .type-h3::after {
