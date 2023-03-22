@@ -95,7 +95,9 @@
                     {% for card in decklist.main_deck %}
                     {% if "Spell" in card.type %}
                     <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
-                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        <a href="/card/{{card.id}}">
+                            <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        </a>
                         {% if current_user.id == deck.user_id %}
                         <div class="card-btns">
                             <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
@@ -119,7 +121,9 @@
                     {% for card in decklist.main_deck %}
                     {% if "Trap" in card.type %}
                     <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
-                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        <a href="/card/{{card.id}}">
+                            <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        </a>
                         {% if current_user.id == deck.user_id %}
                         <div class="card-btns">
                             <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
@@ -142,7 +146,9 @@
                     <h3 class="type-h3">Extra Deck</h3>
                     {% for card in decklist.extra_deck %}
                     <div class="decklist-card decklist-card-{{card.id}}" onmouseenter="displayCard('{{card.img_url}}')">
-                        <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        <a href="/card/{{card.id}}">
+                            <p class="cardnamep"> <span class="card-{{card.id}}-quantity">{{card.quantity}}</span> <span class="cardnamespan">{{card.name}}</span></p>
+                        </a>
                         {% if current_user.id == deck.user_id %}
                         <div class="card-btns">
                             <form onsubmit="event.preventDefault(); addCardQuantity(event)" id="add-card-btn-{{card.id}}">
