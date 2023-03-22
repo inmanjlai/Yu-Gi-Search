@@ -19,6 +19,8 @@ const addCardQuantity = async(e) => {
     const req = await (await fetch(`/decklist/add-quantity/${deck_id}/${card_id}`, {method: "POST"})).json()
 
     card_quantity_span.innerText = req.response
+
+    adjustMaxHeight()
 }
 
 const delCardQuantity = async(e) => {
@@ -34,4 +36,6 @@ const delCardQuantity = async(e) => {
     }
 
     card_quantity_span.innerText = req.response
+
+    adjustMaxHeight()
 }

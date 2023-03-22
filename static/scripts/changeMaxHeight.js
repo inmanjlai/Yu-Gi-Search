@@ -1,23 +1,25 @@
 const decklistContainer = document.querySelector('.decklist-container')
 const cardTypes = document.querySelectorAll('.card-types');
 
-window.addEventListener('resize', (e) => {
-    cardTypes.forEach((ele) => {
-        if (ele.children.length > 15) {
-            if (window.innerWidth >= 1700) {
-                decklistContainer.style.maxHeight = "1500px"
-            } else if (window.innerWidth <= 650) {
-                decklistContainer.style.maxHeight = "none"
+function adjustMaxHeight() {
 
-            }
-        } 
+    let aboveMidThreshold = (currentValue) => currentValue >= 10
+    let aboveHighThreshold = (currentValue) => currentValue >= 10
+    let numberOfTypes = []
+
+    cardTypes.forEach((ele, idx) => {
+        if (idx !== 3) numberOfTypes.push(ele.children.length)
     })
+
+    if (numberOfTypes.some(aboveMidThreshold)) decklistContainer.style.maxHeight = "1500px"
+    else decklistContainer.style.maxHeight = "900px"
+
+}
+
+window.addEventListener('resize', (e) => {
+    adjustMaxHeight()
 })
 
 cardTypes.forEach((ele) => {
-    if (ele.children.length > 15) {
-        if (window.innerWidth >= 1700) {
-            decklistContainer.style.maxHeight = "1500px"
-        }
-    }
+    adjustMaxHeight()
 })
