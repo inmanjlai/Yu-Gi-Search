@@ -63,17 +63,17 @@ a {
 */
 
 .register-form-container {
-    background-color: rgb(237, 237, 237);
-    min-width: 50%;
+    background-color: #F6F6F6;
+    /* min-width: 50%; */
     min-height: 50%;
     /* margin: 20px; */
     /* padding: 20px; */
-    border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
+    border: 1px solid #4d4d4d;
     display: flex;
     justify-content: space-evenly;
     /* align-items: center; */
-    box-shadow: 0 5px 10px rgba(44, 44, 44, 0.2);
+    font-family: 'Roboto Mono', monospace;
+
 }
 
 .register-form {
@@ -86,48 +86,46 @@ a {
 }
 
 .register-form a {
-    color: #af863a;
+    color: #4e9d9a;
     text-decoration: underline;
     text-align: center;
 }
 
 .register-form a:hover{
-    color: #e8b047;
+    color: #59cfcb;
 }
 
 .register-form label {
-    font-weight: 700;
     font-size: 14px;
 }
 
 .register-form input {
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
+    border: 1px solid #4d4d4d;
     padding: 10px;
     font-size: 16px;
-
+    font-family: 'Roboto Mono', monospace;
 }
 
 .register-form textarea {
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
+    border: 1px solid #4d4d4d;
     padding: 10px;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto Mono', monospace;
     resize: none;
 }
 
 .register-form button {
     padding: 10px;
     font-size: 16px;
-    border-radius: 5px;
     border: none;
-    background-color: #e8b047;
+    background-color: #4d4d4d;
     color: white;
-    font-weight: 700;
+    transition: background-color 0.3s;
+    font-family: 'Roboto Mono', monospace;
+
 }
 .register-form button:hover {
-    background-color: #f1d092;
+    background-color: #4e9d9a;
     cursor: pointer;
 }
 
@@ -142,7 +140,7 @@ a {
     /* height: 100%; */
     /* margin-left: 20px; */
     padding: 40px;
-    background-color: #e8b047;
+    background-color: #4d4d4d;
 }
 
 .register-page-content {
@@ -195,587 +193,10 @@ a {
 ************************************************************************************** 
 */
 
-.profile-page-content {
-    height: 90%;
-    display: flex;
-    /* justify-content: center; */
-    /* background-color: rgba(248, 248, 248, 1); */
-    /* border-radius: 5px; */
-    /* border: 1px solid rgba(44, 44, 44, 0.3); */
-    /* margin: 20px; */
-}
-
-.profile-page-content h1 {
-    font-size: 36px;
-    word-wrap: break-word;
-}
-
-.profile-page-content h1, h2, h3 {
-    color: #515151;
-}
-
-.profile-left {
-    background-color: rgba(248, 248, 248, 1);
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
-    min-width: 30%;
-    max-width: 30%;
-    height: max-content;
-    min-height: 30%;
-    font-size: 1.6rem;
-}
-
-.profile-left h2 {
-    font-size: smaller;
-    margin-top: 20px;
-}
-
-.profile-left p {
-    font-size: 16px;
-    margin-top: 10px;
-    line-height: 1.4;
-}
-
-.bio {
-    border-bottom: 1px solid rgba(44, 44, 44, 0.5);
-    padding-bottom: 10px;
-}
-
-.profile-right {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.users-comments, .users-decks {
-    background-color: rgba(237, 237, 237, 1);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    margin: 20px;
-    flex-grow: 1;
-    max-width: 1200px;
-
-}
-
-.users-decks {
-    /* height: 20%; */
-    overflow: auto;
-    max-height: 49%;
-}
-
-.users-decks h1 {
-    position: sticky;
-    top: 0;
-    background-color: rgba(248, 248, 248, 1);
-    padding: 20px;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
-    z-index: 2;
-}
-
-.all-decks {
-    display: flex;
-    color: #515151;
-    flex-direction: row;
-    min-height: 80%;
-    flex-wrap: wrap;
-    padding: 20px;
-    /* justify-content: center; */
-    gap: 10px;
-}
-
-.deck-container {
-    background-color: rgba(248, 248, 248, 1);
-    /* padding: 10px; */
-    margin: 10px;
-    width: 45%;
-    min-height: 200px;
-    max-width: 350px;
-    max-height: 200px;
-    flex-grow: 1;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    overflow: hidden;
-    object-fit: contain;
-    position: relative;
-}
-
-.deck-container:hover {
-    outline: 3px solid #e8b047;
-    box-shadow: 0 0 20px #ffa200b2;
-}
-
-.deck-container p {
-    font-size: 1rem;
-    color: white;
-    background-color: rgba(44, 44, 44, 0.7);
-    padding: 10px;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-}
-
-.deck-container img {
-    height: 200%;
-    width: auto;
-    position: absolute;
-    transform: translateY(150px)
-}
-
-.users-comments {
-    overflow: auto;
-    max-height: 50%;
-}
-
-.users-comments h1 {
-    padding: 20px;
-    border-bottom: 1px solid rgba(44, 44, 44, 0.3);
-    background-color: rgba(248, 248, 248, 1);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
-    position: sticky;
-    top: 0;
-}
-
-.no-comments, .no-decks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #7d7d7d;
-    height: 75%;
-}
-
-@media screen and (max-width: 900px) {
-    .profile-page-content {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .profile-left {
-        height: 800px;
-        max-height: 400px;
-        width: 100%;
-        max-width: 90%;
-        font-size: large;
-        overflow: auto;
-
-    }
-
-    .users-comments {
-        min-height: max-content;
-        height: max-content
-    }
-}
 
 /*
 ************************************************************************************** 
 ************************************DECKLIST PAGE************************************* 
 ************************************************************************************** 
 */
-
-.total {
-    color: #7d7d7d;
-}
-
-
-
-.error {
-    background-color: rgb(209, 65, 65);
-    padding: 10px;
-    border-radius: 5px;
-    width: 66%;
-    color: white;
-    margin-bottom: 10px;
-    position: absolute;
-    top: -50px;
-}
-
-.decklist-page {
-    /* margin: 20px; */
-    min-height: 80%;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    gap: 20px;
-}
-
-.decklist-page h1 {
-    color: #515151;
-}
-
-.deck-info {
-    display: flex;
-    flex-direction: row;
-    /* width: 50%; */
-    width: 100%;
-    /* max-width: 1100px; */
-    gap: 20px;
-    justify-content: space-between;
-    align-items: flex-end;
-    background-color: rgba(237, 237, 237, 1);
-    padding: 20px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    /* border-radius: 5px; */
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 10000;
-}
-
-.deck-info > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-
-.deck-info form .addbtn {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #e8b047;
-    background-color: #e8b047;
-    transition: background-color 0.2s;
-    color: white;
-}
-
-.deck-info form .addbtn:hover {
-    background-color: #f1d092;
-    cursor: pointer;
-}
-
-.decklist-area {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    min-height: 90%;
-}
-
-.card-display {
-    background-color: rgba(237, 237, 237, 1);
-    height: max-content;
-    padding: 20px;
-    position: sticky;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.1);
-    top: 100px;
-    z-index: 1;
-}
-
-
-
-.decklist-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 20px;
-    min-width: 489px;
-    background-color: rgb(237, 237, 237);
-    border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.2);
-    max-width: 1100px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    overflow: auto;
-}
-
-.card-types {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    /* width: 100%; */
-    height: max-content;
-    max-width: 500px;
-    width: 100%;
-    gap: 10px;
-    padding: 10px;
-}
-
-.card-btns {
-    display: flex;
-    flex-direction: row;
-    /* outline: 2px solid red; */
-}
-
-.card-btns form {
-    width: 50%;
-}
-
-
-.type-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* flex-grow: 1; */
-    max-width: 33%;
-    position: relative;
-}
-
-.decklist-card {
-    display: flex;
-    flex-direction: row;
-    background-color: rgba(248, 248, 248, 1);
-    /* padding: 10px; */
-    border-radius: 5px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    width: 100%;
-    max-width: 500px;
-    /* max-width: 50%; */
-}
-
-.type-h3 {
-    max-width: 40%;
-}
-
-.decklist-card p {
-    padding: 9px 10px;
-    font-size: 14px;
-}
-
-#delete-btn{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* transition: background-color 0.2s, color 0.2s; */
-    border-left: 1px solid rgba(44, 44, 44, 0.3);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 5px;
-    /* flex-grow: 1; */
-    /* font-size: 12px; */
-}
-
-#delete-btn:hover {
-    background-color: rgb(228, 64, 64);
-    outline: 1px solid rgb(228, 64, 64);
-    color: white;
-}
-
-#add-card-searchbar {
-    position: relative;
-    padding: 10px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    background-color: rgba(248, 248, 248, 1);
-    flex-grow: 1;
-    /* max-width: 400px; */
-    /* align-self: flex-end; */
-}
-
-.add-card-dropdown {
-    position: absolute;
-    top: 40px;
-    background-color: rgb(237, 237, 237);
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 0 3px 10px rgba(44, 44, 44, 0.3);
-    z-index: 10000;
-    width: 100%;
-    display: none;
-}
-
-.add-card-dropdown form {
-    display: flex;
-    width: 100%;
-}
-
-.add-card-dropdown button {
-    background-color: transparent;
-    color: black;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    text-align: left;
-}
-
-.add-card-dropdown button:hover {
-    background-color: rgba(248, 248, 248, 1);
-    cursor: pointer;
-}
-
-.editDeckModal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(44, 44, 44, 0.7);
-    z-index: 9999999;
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
-
-.editDeckModalContent {
-    border-radius: 5px;
-    background-color: rgba(248, 248, 248, 1);
-}
-
-.editDeckModalContent form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    /* align-items: center; */
-    min-width: 400px;
-    padding: 20px;
-    gap: 10px;
-}
-
-.editDeckModalContent form label {
-    text-align: left;
-}
-
-.editDeckModalContent form input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid rgba(44, 44, 44, 0.3);
-    border-radius: 5px;
-}
-
-.editDeckModalContent form button {
-    width: 100%;
-    background-color: #e8b047;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-    color: white;
-}
-
-.editDeckModalContent form button:hover {
-    background-color: #f1d092;
-    cursor: pointer;
-}
-
-.editDeckButton {
-    /* background-color: #e8b047; */
-    background-color: transparent;
-    /* color: white; */
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 5px;
-}
-
-.editDeckButton:hover {
-    /* background-color: #f1d092; */
-    cursor: pointer;
-}
-
-.deck-info > div {
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
-    gap: 10px;
-    flex-grow: 1;
-}
-
-.deck-info > div > p {
-    margin-top: 5px;
-}
-
-#add-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* transition: background-color 0.2s, color 0.2s; */
-    border-left: 1px solid rgba(44, 44, 44, 0.3);
-    padding: 5px;
-}
-
-#add-btn:hover {
-    background-color: rgb(85, 204, 228);
-    outline: 1px solid rgb(85, 204, 228);
-    color: white;
-}
-
-.editDeckModal .delete-deck {
-    background-color: rgb(209, 65, 65);
-    color: white;
-}
-
-.editDeckModal .delete-deck:hover {
-    background-color: rgb(230, 106, 106);
-}
-
-@media screen and (min-width: 1700px) {
-
-
-
-    .decklist-container {
-        max-height: 1600px;
-        flex-wrap: wrap;
-        flex-grow: 1;
-    }
-
-}
-
-@media screen and (max-width: 900px) {
-    .card-display {
-        display: none;
-    }
-
-    .decklist-container {
-        width: 90%;
-        min-width: 0px;
-    }
-
-    .deck-info {
-        font-size: xx-small;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .deck-info > div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        gap: 10px;
-    }
-
-
-
-    .type-container {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .editDeckButton {
-        font-size: 10px;
-    }
-
-    #add-card-searchbar {
-        width: 100%;
-    }
-}
 

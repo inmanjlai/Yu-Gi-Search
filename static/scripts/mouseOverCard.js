@@ -4,6 +4,10 @@ const displayCard = (img_url) => {
     cardDisplay.children[0].src = img_url
 }
 
+function cardImgModal() {
+    console.log("hello");
+}
+
 // const split = window.location.href.split("/")
 // let deck_id = split[split.length - 1]
 

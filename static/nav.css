@@ -225,7 +225,17 @@ nav {
     visibility: hidden;
 }
 
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+  }
 
+  input:focus-visible {
+    outline: none;
+  }
 
 @media screen and (max-width: 900px) {
 

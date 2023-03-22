@@ -1,0 +1,420 @@
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.total {
+    color: #4d4d4d;
+}
+
+.error {
+    background-color: rgb(209, 65, 65);
+    padding: 10px;
+    border-radius: 5px;
+    width: 66%;
+    color: white;
+    margin-bottom: 10px;
+    position: absolute;
+    top: -50px;
+}
+
+.decklist-page {
+    /* min-height: 80%; */
+    /* width: auto; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Roboto Mono', monospace;
+    flex-grow: 3;
+}
+
+.decklist-page h1 {
+    color: #4d4d4d;
+    font-size: 24px;
+}
+
+.decklist-page h1::after {
+    content: "_";
+    color: #4d4d4d;
+    margin-left: 5px;
+}
+
+.deck-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #4d4d4d;
+    position: sticky;
+    top: 85px;
+    z-index: 10000;
+    background-color: white;
+}
+
+.deck-info > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+
+.deck-info form .addbtn {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #e8b047;
+    background-color: #e8b047;
+    transition: background-color 0.2s;
+    color: white;
+}
+
+.deck-info form .addbtn:hover {
+    background-color: #f1d092;
+    cursor: pointer;
+}
+
+.decklist-area {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.card-display {
+    background-color: #f6f6f6;
+    height: max-content;
+    padding: 20px;
+    position: sticky;
+    border: 1px solid #4d4d4d;
+    top: 180px;
+    z-index: 1;
+    margin-top: 40px;
+}
+
+
+
+.decklist-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 489px;
+    max-width: 1100px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* overflow: auto; */
+}
+
+.card-types {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: max-content;
+    max-width: 500px;
+    width: 100%;
+    gap: 10px;
+}
+
+.card-btns {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.decklist-card:hover p{
+    text-decoration: underline;
+}
+
+.decklist-card:hover {
+    transform: translate(5px, -5px);
+    box-shadow: -8px 8px 0 #4e9d9a4d;
+}
+
+.card-btns form {
+    width: 50%;
+}
+
+
+.type-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 33%;
+    position: relative;
+}
+
+.decklist-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #f6f6f6;
+    border: 1px solid #4d4d4d;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    transition: box-shadow 0.3s, transform 0.3s;
+    max-width: 500px;
+}
+
+.type-h3 {
+    max-width: 40%;
+    font-size: 24px;
+}
+
+.type-h3::after {
+    content: "_";
+    margin-left: 5px;
+    color: #4d4d4d;
+}
+
+.decklist-card p {
+    padding: 9px 10px;
+    font-size: 14px;
+}
+
+#delete-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transition: background-color 0.2s, color 0.2s; */
+    border-left: 1px solid #4d4d4d;
+    padding: 5px;
+    transition: background-color 0.3s;
+    height: 100%;
+}
+
+#delete-btn:hover {
+    background-color: #e06d6d;
+    color: white;
+}
+
+#add-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transition: background-color 0.2s, color 0.2s; */
+    border-left: 1px solid #4d4d4d;
+    height: 100%;
+    padding: 5px;
+    transition: background-color 0.3s;
+}
+
+#add-btn:hover {
+    background-color: #57b8b5;
+    color: white;
+}
+
+#add-card-searchbar {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #4d4d4d;
+    background-color: #f6f6f6;
+    flex-grow: 1;
+    /* max-width: 400px; */
+    /* align-self: flex-end; */
+    font-family: 'Roboto Mono', monospace;
+}
+
+.add-card-dropdown {
+    position: absolute;
+    top: 40px;
+    background-color: #f6f6f6;
+    border: 1px solid #4d4d4d;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 10000;
+    width: 100%;
+    display: none;
+    border-top: none;
+}
+
+.add-card-dropdown form {
+    display: flex;
+    width: 100%;    
+}
+
+.add-card-dropdown button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    font-family: 'Roboto Mono', monospace;
+
+}
+
+.add-card-dropdown button:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.editDeckModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(44, 44, 44, 0.7);
+    z-index: 9999999;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.editDeckModalContent {
+    font-family: 'Roboto Mono', monospace;
+    background-color: white;
+    border: 1px solid #4d4d4d;
+}
+
+.editDeckModalContent form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+    min-width: 400px;
+    padding: 20px;
+    gap: 10px;
+}
+
+.editDeckModalContent form label {
+    text-align: left;
+}
+
+.editDeckModalContent form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #4d4d4d;
+    background-color: #f6f6f6;
+    font-family: 'Roboto Mono', monospace;
+
+}
+
+.editDeckModalContent form button {
+    width: 100%;
+    background-color: #4d4d4d;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    transition: background-color 0.3s;
+}
+
+.editDeckModalContent form button:hover {
+    background-color: #4e9d9a;
+    cursor: pointer;
+}
+
+.editDeckButton {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+
+}
+
+.editDeckButton:hover {
+    /* background-color: #f1d092; */
+    cursor: pointer;
+}
+
+.deck-info > div {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-grow: 1;
+}
+
+.deck-controls {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+
+.editDeckModal .delete-deck {
+    background-color: rgb(209, 65, 65);
+    color: white;
+}
+
+.editDeckModal .delete-deck:hover {
+    background-color: rgb(230, 106, 106);
+}
+
+@media screen and (min-width: 1700px) {
+
+
+
+    .decklist-container {
+        max-height: 900px;
+        flex-wrap: wrap;
+        flex-grow: 1;
+    }
+
+}
+
+@media screen and (max-width: 900px) {
+    .card-display {
+        display: none;
+    }
+
+    .decklist-container {
+        width: 90%;
+        min-width: 0px;
+    }
+
+    .deck-info {
+        font-size: xx-small;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px 20px;
+    }
+
+    .deck-info > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+
+
+    .type-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .editDeckButton {
+        font-size: 10px;
+    }
+
+    #add-card-searchbar {
+        width: 100%;
+    }
+}
+

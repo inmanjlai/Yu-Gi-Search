@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yu-Gi-Search | Profile</title>
+    <link rel="stylesheet" href="/static/profile.css">
 </head>
 <body>
     {% include "/navbar.html" %}
@@ -17,38 +18,40 @@
             <p>{{user.bio}}</p>
         </div>
         <div class="profile-right">
-            <div class="users-decks">
-                <h1>User's Decks</h1>
-                {% if not decks %}
-                <div class="no-decks">
-                    <p>No decks made</p>
-                </div>
-                {% else %}
-                <div class="all-decks">
+            <div class="recent-decks-container">
+                <h1>{{user.username}}'s Decks</h1>
+                <div class="recent-decks">
                     {% for deck in decks %}
-                    <a class="deck-container" href="/decks/{{deck.id}}">
-                        <p>{{deck.name}}</p>
-                        <img src={{deck.cover_img}} alt="">
-                    </a>
+                        <a class="recent-deck-container" href="/decks/{{deck.id}}">
+                            <img src="{{deck.cover_img}}" alt="">
+                            <div>
+                                <span class="material-symbols-outlined">
+                                    folder
+                                </span>   
+                                <p>{{deck.name}}</p>
+                            </div>
+                        </a>
                     {% endfor %}
                 </div>
-                {% endif %}
             </div>
-            <div class="users-comments">
-                <h1>User's Comment History</h1>
-                {% if not comments %}
-                <div class="no-comments">
-                    <p>Lurker detected</p>
+            <div class="recent-comments">
+                <h1>{{user.username}}'s Comments</h1>
+                <div class="recent-comments-list">
+                    {% for comment in comments %}
+                        <div class="single-comment-card">
+                            <p>{{comment.content}}</p>
+                            <p class="posted-by">
+                                <a href="/users/{{comment.user_id}}" class="comment-author">{{comment.user.username}}</a> 
+                                commented on 
+                                <a href="/card/{{comment.card.id}}" class="card-name">{{comment.card.name}}</a>
+                            </p>
+                        </div>    
+    
+                    {% endfor %}
                 </div>
-                {% endif %}
-                {% for comment in comments %}
-                    <div class="single-comment-card">
-                        <p>Commented on <a href="/card/{{comment.card.id}}">{{comment.card.name}}</a></p>
-                        <p>{{comment.content}}</p>
-                    </div>    
-                {% endfor %}
             </div>
         </div>
     </div>
+    {% include './footer.html' %}
 </body>
 </html>
