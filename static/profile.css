@@ -37,7 +37,7 @@ body {
     margin: 20px;
     padding: 20px;
     height: max-content;
-    min-height: 30%;
+    /* min-height: 30%; */
     font-size: 1.6rem;
     width: 80%;
 }
@@ -137,7 +137,7 @@ body {
 
 .recent-decks {
     color: #515151;
-    overflow: auto;
+    /* overflow: auto; */
 
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
@@ -219,7 +219,7 @@ body {
     }
 
     .profile-left {
-        height: 800px;
+        height: max-content;
         max-height: 400px;
         width: 100%;
         max-width: 90%;

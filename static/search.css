@@ -187,7 +187,15 @@
     }
 
     .page-numbers {
-        /* top: 80px; */
+        top: 0px;
         background-color: white;
+    }
+
+    .page-numbers h1 {
+        text-align: start;
+    }
+
+    body nav {
+        position: static;
     }
 }

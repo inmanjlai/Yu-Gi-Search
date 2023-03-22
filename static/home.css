@@ -106,7 +106,7 @@ body {
 
 .recent-decks {
     color: #515151;
-    overflow: auto;
+    /* overflow: auto; */
 
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
@@ -194,6 +194,6 @@ body {
     .recent-decks-container {
         width: 100%;
         min-width: 100%;
-        overflow: auto;
+        /* overflow: auto; */
     }
 }
