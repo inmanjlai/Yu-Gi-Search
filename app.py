@@ -68,7 +68,7 @@ def create_sets(card):
 
             set_in_db = Set.query.filter(Set.name == set["set_name"]).first()
 
-        
+
         association_already_exists = CardSets.query.filter(CardSets.card_id == card_to_associate.id, CardSets.set_id == set_in_db.id).first()
 
         if association_already_exists:
@@ -106,7 +106,7 @@ def create_card_in_db(card):
 
     if "XYZ" in card['type']:
         rank = card["level"]
-    
+
     lowest_price = card["card_prices"][0]['tcgplayer_price']
 
     if lowest_price == '0.0':
@@ -166,7 +166,7 @@ def get_cards_like_name(card_name):
 def get_card_sets(card):
     card_id = card["id"]
     cards_and_sets = CardSets.query.filter(CardSets.card_id == card_id).all()
-    
+
     return [card_set.to_dict() for card_set in cards_and_sets]
 
 def get_cards_paginated(card_name, page_number):
@@ -174,7 +174,7 @@ def get_cards_paginated(card_name, page_number):
     return cards
 def get_search_bar_options(card_name):
     cards = Card.query.filter(Card.name.ilike("%" + card_name + "%")).limit(10).all()
-    return [{"id": card.id, "name": card.name} for card in cards]   
+    return [{"id": card.id, "name": card.name} for card in cards]
 
 def get_random_card():
     random_card = Card.query.order_by(func.random()).limit(1).first()
@@ -215,7 +215,7 @@ def search_paginated(page_number):
         paginated_cards = Card.query.filter(Card.description.ilike("%" + card_name_updated + "%")).paginate(page=page_number, per_page=50)
     else:
         paginated_cards = get_cards_paginated(card_name=card_name, page_number=page_number)
-            
+
     if "Error" in paginated_cards:
         fetch_card = request_card(card_name)
         if fetch_card.ok:
@@ -231,11 +231,11 @@ def search_paginated(page_number):
 
         print("CARD NAME AFTER:",card_name, "PAGE NUMBER:", page_number)
         return render_template(
-            "cards.html", 
-            cards=paginated_cards.items, 
-            card_name=card_name, 
-            page_number=paginated_cards.page, 
-            prev=paginated_cards.has_prev, 
+            "cards.html",
+            cards=paginated_cards.items,
+            card_name=card_name,
+            page_number=paginated_cards.page,
+            prev=paginated_cards.has_prev,
             next=paginated_cards.has_next,
             total=paginated_cards.total,
         )
@@ -303,11 +303,11 @@ def login():
         password_is_correct = user.check_password(password)
         if password_is_correct:
             login_user(user)
-            return redirect("/")    
+            return redirect("/")
         else:
-            return render_template("login.html", error=error) 
+            return render_template("login.html", error=error)
     else:
-        return render_template("login.html", error=error)       
+        return render_template("login.html", error=error)
 
 @app.route("/users/<int:user_id>")
 def profile_page(user_id):
@@ -421,11 +421,11 @@ def add_card_to_decklist(deck_id, card_id):
 
         if card:
             check_if_exists = DeckList.query.filter(DeckList.card_id==card.id, DeckList.deck_id==deck_id).first()
-            
+
             if check_if_exists:
                 check_if_exists.quantity = check_if_exists.quantity + 1
                 db.session.commit()
-            else:    
+            else:
                 new_decklist_update = DeckList(card_id=card.id, deck_id=deck_id)
                 db.session.add(new_decklist_update)
                 db.session.commit()
@@ -436,20 +436,20 @@ def add_card_to_decklist(deck_id, card_id):
             return redirect(f"/decks/{deck_id}/404")
     else:
         return 401
-            
+
 @app.route("/decklist/delete", methods=["POST"])
 def delete_from_deck():
     card_id = request.form.get("card-id")
     deck_id = request.form.get("deck-id")
-    
+
     decklist = DeckList.query.filter(DeckList.card_id==card_id, DeckList.deck_id==deck_id).first()
     if decklist.quantity > 1:
         decklist.quantity = decklist.quantity - 1
     else:
         db.session.delete(decklist)
-    
+
     db.session.commit()
-    
+
     deck = Deck.query.get(deck_id)
     decklist = deck.get_decklist()
     return redirect(f"/decks/{deck_id}")
@@ -457,7 +457,7 @@ def delete_from_deck():
 @app.route("/card/<card_name>/img")
 def get_card_img(card_name):
     card = Card.query.filter(Card.name == card_name).first()
-    
+
     print(card.img_url)
 
     return {"img_url": card.img_url}
@@ -478,3 +478,6 @@ def edit_deck(deck_id):
 
 #     create_card_in_db(buster_blader['data'][0])
 #     return "wow"
+
+if __name__ == "__main__":
+    app.run(debug=True)
